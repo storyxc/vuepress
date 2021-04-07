@@ -1,0 +1,24 @@
+{
+  "name": "vuepress",
+  "version": "1.0.0",
+  "description": "storyxc blog",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/storyxc/vuepress.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/storyxc/vuepress/issues"
+  },
+  "homepage": "https://github.com/storyxc/vuepress#readme"
+}
