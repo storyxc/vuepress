@@ -27,10 +27,11 @@ module.exports = [
         text: '在线文档',
         ariaLabel: 'Docs Menu',
         items: [
-            { text: 'Java', link: 'https://www.runoob.com/java/java-tutorial.html'},
+            { text: 'Java', link: 'https://www.runoob.com/java/java-tutorial.html' },
             { text: 'Python', link: 'https://python3-cookbook.readthedocs.io/zh_CN/latest/index.html' },
             { text: 'Vue', link: 'https://cn.vuejs.org/' }
         ]
     },
+    { text: '壁纸', link: 'https://www.storyxc.com/images' },
     { text: 'github', link: 'https://github.com/storyxc' },
 ]
