@@ -1,10 +1,25 @@
+const moment = require('moment');
 module.exports = {
+    base: "/vuepress/",
     title: '故事',
     description: '故事的vuepress博客',
     head: [
-        ['link', {rel: 'icon', href: '/assets/img/favicon.ico'}],
-        ['meta', {name: 'author', content: '故事'}],
-        ['meta', {name: 'keywords', content: 'Java,Python,Vue,VuePress,后端开发'}]
+        ['link', { rel: 'icon', href: '/assets/img/favicon.ico' }],
+        ['meta', { name: 'author', content: '故事' }],
+        ['meta', { name: 'keywords', content: 'Java,Python,Vue,VuePress,后端开发' }]
+    ],
+    plugins: [
+        [
+            '@vuepress/last-updated',
+            {
+                transformer: (timestamp, lang) => {
+                    // 不要忘了安装 moment
+                    const moment = require('moment')
+                    moment.locale('zh-cn')
+                    return moment(timestamp).format("lll")
+                }
+            }
+        ]
     ],
     themeConfig: {
         logo: '/assets/img/story.jpg',

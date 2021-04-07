@@ -8,7 +8,8 @@
   },
   "scripts": {
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "deploy": "bash deploy.sh"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/storyxc/vuepress/issues"
   },
-  "homepage": "https://github.com/storyxc/vuepress#readme"
+  "homepage": "https://github.com/storyxc/vuepress#readme",
+  "dependencies": {
+    "moment": "^2.29.1"
+  }
 }
