@@ -10,14 +10,14 @@ module.exports = {
             return moment(timestamp).format("lll")
         }
     }
-    ,
-    '@vuepress/pwa': {
-        serviceWorker: true,
-        updatePopup: {
-            message: "New content is available.",
-            buttonText: "Refresh"
-        }
-    }
+    // ,
+    // '@vuepress/pwa': {
+    //     serviceWorker: true,
+    //     updatePopup: {
+    //         message: "New content is available.",
+    //         buttonText: "Refresh"
+    //     }
+    // }
     ,
     '@vuepress/back-to-top': true
 }
