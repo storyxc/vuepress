@@ -19,5 +19,8 @@ module.exports = {
     //     }
     // }
     ,
-    '@vuepress/back-to-top': true
+    '@vuepress/back-to-top': true,
+    '@vuepress/medium-zoom': {
+        selector: 'img'
+    }
 }
