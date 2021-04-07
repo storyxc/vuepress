@@ -1,10 +1,9 @@
 # 指南
 ```java
 public static void main(String args){
-    System.out.println("test")
+    System.out.println("Hello,World!")
 }
 
 ```
-
-`test`
-https://www.storyxc.com
+博客迁移自
+[故事而已](https://www.storyxc.com)

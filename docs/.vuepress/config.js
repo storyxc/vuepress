@@ -9,6 +9,7 @@ module.exports = {
     themeConfig: {
         logo: '/assets/img/story.jpg',
         lastUpdated: 'Last Updated',
-        nav: navConf
+        nav: navConf,
+        searchMaxSuggestions: 10
     }
 }
