@@ -1,9 +1,11 @@
 # 指南
-```java
-public static void main(String args){
-    System.out.println("Hello,World!")
-}
 
-```
-博客迁移自
-[故事而已](https://www.storyxc.com)
+## 写博客的初心
+- 通过技术博客的方式帮助其他开发者
+- 养成写技术博客的习惯,督促自己不断学习,不断进步
+
+
+## 博客概述
+目前博客有Java和Python两个模块:
+- [Java相关内容](/java/)
+- [Python相关内容](/python/)

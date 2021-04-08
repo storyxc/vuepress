@@ -9,19 +9,9 @@ module.exports = {
             moment.locale('zh-cn')
             return moment(timestamp).format("lll")
         }
-    }
-    // ,
-    // '@vuepress/pwa': {
-    //     serviceWorker: true,
-    //     updatePopup: {
-    //         message: "New content is available.",
-    //         buttonText: "Refresh"
-    //     }
-    // }
-    ,
+    },
     '@vuepress/back-to-top': true,
     '@vuepress/medium-zoom': {
         selector: 'img.x'
     },
-    "vuepress-plugin-auto-sidebar": {}
 }
