@@ -125,28 +125,28 @@ function getPythonSidebar(base, spider, web, others) {
       title: base,
       collapsable: false,
       children: [
-        '测试'
+        
       ]
     },
     {
       title: spider,
       collapsable: false,
       children: [
-        'story',
+        
       ]
     },
     {
       title: web,
       collapsable: false,
       children: [
-        '测试'
+        
       ]
     },
     {
       title: others,
       collapsable: false,
       children: [
-        'story',
+        
       ]
     }
   ]
