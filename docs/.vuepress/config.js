@@ -101,6 +101,7 @@ function getJavaSidebar(base, frame, midware, db, designpattern, tools, others) 
       title: tools,
       collapsable: false,
       children: [
+        'Markdown基础语法',
         'git命令整理',
       ]
     },
@@ -109,7 +110,6 @@ function getJavaSidebar(base, frame, midware, db, designpattern, tools, others) 
       collapsable: false,
       sidebarDepth: 1,
       children: [
-        'Markdown基础语法',
         'linux服务器安装OpenOffice踩坑',
         'POI踩坑-zip file is closed',
         'OpenJDK没有jstack等命令的解决办法',
