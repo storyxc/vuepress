@@ -79,7 +79,7 @@ function getJavaSidebar(base, frame, midware, db, designpattern, tools, others) 
       children: [
         '分布式锁解决方案',
         '关于消息中间件MQ',
-        'kafka学习记录(一)',
+        'kafka学习记录',
       ]
     },
     {
