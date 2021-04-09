@@ -12,10 +12,22 @@ Index:暂存区
 ```
 
 ## 撤回修改
-`git commit --amend` :提交完发现漏掉了几个文件没有添加，或者提交信息写错了,此时，可以运行带有 --amend 选项的提交命令来重新提交：
-`git checkout -- <file>` 
-`git reset --(hard/soft/mixed) HEAD~`
-关于`git checkout`和`git reset`建议看下这篇文章,[git重置](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86#_git_reset)
+- `git commit --amend` :提交完发现漏掉了几个文件没有添加，或者提交信息写错了,此时，可以运行带有 --amend 选项的提交命令来重新提交
+
+- `git checkout -- <file>`  把`readme.txt`文件在工作区的修改全部撤销，这里有两种情况：
+
+  一种是`readme.txt`自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+
+  一种是`readme.txt`已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+
+- `git reset [--soft | --mixed | --hard] [HEAD]` 
+
+  - 使用soft只会移动HEAD到上一个版本,可以理解为撤回上一次commit,暂存区和工作区不受影响
+  - 使用mixed在移动HEAD到上一个版本,并且回退暂存区的内容,工作区不受影响
+  - 使用hard,除了移动HEAD指针,取消暂存内容,还会覆盖回退工作区内容,属于比较危险的命令,谨慎使用
+  - 不加括号中的参数 默认参数为mixed, 如果想回退多个版本可以修改为HEAD^^^或HEAD~3代表回退3个版本,依此类推
+
+- 关于`git checkout`和`git reset`建议看下这篇文章,[git重置](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86#_git_reset)
 
 
 
