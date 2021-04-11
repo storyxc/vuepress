@@ -237,8 +237,9 @@ set和java中的set集合一样存储的数据都是不重复的
 
 ### python的数据类型转换
 
-| [int(x [,base\])](https://www.runoob.com/python3/python-func-int.html) | 将x转换为一个整数                                   |
+| 语法                                                         | 作用                                                |
 | ------------------------------------------------------------ | --------------------------------------------------- |
+| [int(x [,base\])](https://www.runoob.com/python3/python-func-int.html) | 将x转换为一个整数                                   |
 | [float(x)](https://www.runoob.com/python3/python-func-float.html) | 将x转换到一个浮点数                                 |
 | [complex(real [,imag\])](https://www.runoob.com/python3/python-func-complex.html) | 创建一个复数                                        |
 | [str(x)](https://www.runoob.com/python3/python-func-str.html) | 将对象 x 转换为字符串                               |
@@ -349,6 +350,22 @@ Python 中用 **elif** 代替了 **else if**，所以if语句的关键字为：*
 
 - 同样的如果if后跟元组，list，set，字典 只要不为空就是true
 
+#### 三目运算
+
+和java中的三元运算类似
+
+语法: `变量 = 表达式1 if 条件 else 表达式2`
+
+例如 
+
+```python
+a = 1;
+b = a + 1 if a == 1 else a + 2;
+print(b)
+
+结果:2
+```
+
 
 
 ### 循环控制语句
@@ -388,7 +405,7 @@ else:
 
 #### continue和break
 
-用法上基本和java一样
+用法和java一样
 
 **break区别**：
 
@@ -725,6 +742,30 @@ print ("相加后的值为 : ", sum( 20, 20 ))
 相加后的值为 :  40
 ```
 
+### 列表推导式
+
+作用:快速生成列表
+
+语法:
+
+```python
+变量 = [生成规则 for 临时变量 in 集合]
+```
+
+每循环一次就会生成一个符合生成规则的数据添加到列表中
+
+例如:
+
+```python
+my_list = [i for i in range(5)]
+print(my_list)
+
+#res
+[0,1,2,3,4,5]
+```
+
+
+
 ### 强制位置参数
 
 Python3.8 新增了一个函数形参语法 / 用来指明函数形参必须使用指定位置参数，不能使用关键字参数的形式。
@@ -747,5 +788,631 @@ f(10, 20, 30, d=40, e=50, f=60)
 ```python
 f(10, b=20, c=30, d=40, e=50, f=60)   # b 不能使用关键字参数的形式
 f(10, 20, 30, 40, 50, f=60)           # e 必须使用关键字参数的形式
+```
+
+## 模块
+
+```python
+import module1[, module2[,... moduleN]
+from modname import name1[, name2[, ... nameN]]
+from modname import *
+```
+
+
+
+### __name__属性
+
+一个模块被另一个程序第一次引入时，其主程序将运行。如果我们想在模块被引入时，模块中的某一程序块不执行，我们可以用__name__属性来使该程序块仅在该模块自身运行时执行。
+
+```python
+if __name__ == '__main__':
+   print('程序自身在运行')
+else:
+   print('我来自另一模块')
+```
+
+**说明：** 每个模块都有一个__name__属性，当其值是'__main__'时，表明该模块自身在运行，否则是被引入。
+
+说明：**__name__** 与 **__main__** 底下是双下划线
+
+### dir()函数
+
+```python
+dir(sys)  
+['__displayhook__', '__doc__', '__excepthook__', '__loader__', '__name__',
+ '__package__', '__stderr__', '__stdin__', '__stdout__',
+ '_clear_type_cache', '_current_frames', '_debugmallocstats', '_getframe',
+ '_home', '_mercurial', '_xoptions', 'abiflags', 'api_version', 'argv',
+ 'base_exec_prefix', 'base_prefix', 'builtin_module_names', 'byteorder',
+ 'call_tracing', 'callstats', 'copyright', 'displayhook',
+ 'dont_write_bytecode', 'exc_info', 'excepthook', 'exec_prefix',
+ 'executable', 'exit', 'flags', 'float_info', 'float_repr_style',
+ 'getcheckinterval', 'getdefaultencoding', 'getdlopenflags',
+ 'getfilesystemencoding', 'getobjects', 'getprofile', 'getrecursionlimit',
+ 'getrefcount', 'getsizeof', 'getswitchinterval', 'gettotalrefcount',
+ 'gettrace', 'hash_info', 'hexversion', 'implementation', 'int_info',
+ 'intern', 'maxsize', 'maxunicode', 'meta_path', 'modules', 'path',
+ 'path_hooks', 'path_importer_cache', 'platform', 'prefix', 'ps1',
+ 'setcheckinterval', 'setdlopenflags', 'setprofile', 'setrecursionlimit',
+ 'setswitchinterval', 'settrace', 'stderr', 'stdin', 'stdout',
+ 'thread_info', 'version', 'version_info', 'warnoptions']
+```
+
+### 注意点
+
+自定义模块名不要和系统中要使用的模块名字一样
+
+> 模块搜索顺序->当前目录->系统目录(sys.path)-> 程序报错
+
+
+
+## 包
+
+包是一种管理 Python 模块命名空间的形式，采用"点模块名称"。
+
+比如一个模块的名称是 A.B， 那么他表示一个包 A中的子模块 B 。采用点模块名称这种形式也不用担心不同库之间的模块重名的情况
+
+
+
+```
+sound/                          顶层包
+      __init__.py               初始化 sound 包
+      formats/                  文件格式转换子包
+              __init__.py
+              wavread.py
+              wavwrite.py
+              aiffread.py
+              aiffwrite.py
+              auread.py
+              auwrite.py
+              ...
+      effects/                  声音效果子包
+              __init__.py
+              echo.py
+              surround.py
+              reverse.py
+              ...
+      filters/                  filters 子包
+              __init__.py
+              equalizer.py
+              vocoder.py
+              karaoke.py
+              ...
+```
+
+在导入一个包的时候，Python 会根据 sys.path 中的目录来寻找这个包中包含的子目录。
+
+目录只有包含一个叫做` __init__.py` 的文件才会被认作是一个包，主要是为了避免一些滥俗的名字（比如叫做 string）不小心的影响搜索路径中的有效模块。
+
+最简单的情况，放一个空的 :file:`__init__.py`就可以了。当然这个文件中也可以包含一些初始化代码或者为（将在后面介绍的） `__all__`变量赋值。
+
+用户可以每次只导入一个包里面的特定模块，比如:
+
+```
+import sound.effects.echo
+```
+
+这将会导入子模块:sound.effects.echo。 他必须使用全名去访问:
+
+```
+sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)
+```
+
+还有一种导入子模块的方法是:
+
+```
+from sound.effects import echo
+```
+
+这同样会导入子模块: echo，并且他不需要那些冗长的前缀，所以他可以这样使用:
+
+```
+echo.echofilter(input, output, delay=0.7, atten=4)
+```
+
+还有一种变化就是直接导入一个函数或者变量:
+
+```
+from sound.effects.echo import echofilter
+```
+
+同样的，这种方法会导入子模块: echo，并且可以直接使用他的 echofilter() 函数:
+
+```
+echofilter(input, output, delay=0.7, atten=4)
+```
+
+注意当使用 **from package import item** 这种形式的时候，对应的 item 既可以是包里面的子模块（子包），或者包里面定义的其他名称，比如函数，类或者变量。
+
+import 语法会首先把 item 当作一个包定义的名称，如果没找到，再试图按照一个模块去导入。如果还没找到，抛出一个 **:exc:ImportError** 异常。
+
+反之，如果使用形如 **import item.subitem.subsubitem** 这种导入形式，除了最后一项，都必须是包，而最后一项则可以是模块或者是包，但是不可以是类，函数或者变量的名字。
+
+### 从一个包中导入*
+
+**from sound.effects import \*** : Python 会进入文件系统，找到这个包里面所有的子模块，然后一个一个的把它们都导入进来。
+
+导入语句遵循如下规则：如果包定义文件 `__init__.py `存在一个叫做 **__all__** 的列表变量，那么在使用 **from package import \*** 的时候就把这个列表中的所有名字作为包内容导入。
+
+以下实例在 file:sounds/effects/\__init__.py 中包含如下代码:
+
+
+
+```
+__all__ = ["echo", "surround", "reverse"]
+```
+
+这表示当你使用from sound.effects import *这种用法时，你只会导入包里面这三个子模块。
+
+如果` __all__` 真的没有定义，那么使用**from sound.effects import \***这种语法的时候，就不会导入包 sound.effects 里的任何子模块。他只是把包sound.effects和它里面定义的所有内容导入进来（可能运行`__init__.py`里定义的初始化代码）。
+
+这会把` __init__.py `里面定义的所有名字导入进来。并且他不会破坏掉我们在这句话之前导入的所有明确指定的模块。看下这部分代码:
+
+```
+import sound.effects.echo
+import sound.effects.surround
+from sound.effects import *
+```
+
+这个例子中，在执行 from...import 前，包 sound.effects 中的 echo 和 surround 模块都被导入到当前的命名空间中了。（当然如果定义了 `__all__ `就更没问题了）
+
+## 文件操作
+
+python的io操作相比java的IO流简单太多了,直接就是一个open()函数
+
+### open() 方法
+
+Python open() 方法用于打开一个文件，并返回文件对象，在对文件进行处理过程都需要使用到这个函数，如果该文件无法被打开，会抛出 OSError。
+
+**注意：**使用 open() 方法一定要保证关闭文件对象，即调用 close() 方法。
+
+open() 函数常用形式是接收两个参数：文件名(file)和模式(mode)。
+
+完整的语法格式为：
+
+```python
+open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)
+```
+
+参数说明:
+
+- file: 必需，文件路径（相对或者绝对路径）。
+- mode: 可选，文件打开模式
+- buffering: 设置缓冲
+- encoding: 一般使用utf8
+- errors: 报错级别
+- newline: 区分换行符
+- closefd: 传入的file参数类型
+- opener: 设置自定义开启器，开启器的返回值必须是一个打开的文件描述符。
+
+
+
+| 模式 | 描述                                                         |
+| :--- | :----------------------------------------------------------- |
+| t    | 文本模式 (默认)。                                            |
+| x    | 写模式，新建一个文件，如果该文件已存在则会报错。             |
+| b    | 二进制模式。                                                 |
+| +    | 打开一个文件进行更新(可读可写)。                             |
+| r    | 以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。 |
+| rb   | 以二进制格式打开一个文件用于只读。文件指针将会放在文件的开头。这是默认模式。一般用于非文本文件如图片等。 |
+| r+   | 打开一个文件用于读写。文件指针将会放在文件的开头。           |
+| rb+  | 以二进制格式打开一个文件用于读写。文件指针将会放在文件的开头。一般用于非文本文件如图片等。 |
+| w    | 打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。 |
+| wb   | 以二进制格式打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。一般用于非文本文件如图片等。 |
+| w+   | 打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。 |
+| wb+  | 以二进制格式打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。一般用于非文本文件如图片等。 |
+| a    | 打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。 |
+| ab   | 以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。 |
+| a+   | 打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。 |
+| ab+  | 以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。如果该文件不存在，创建新文件用于读写。 |
+
+### file 对象
+
+file 对象使用 open 函数来创建，下表列出了 file 对象常用的函数：
+
+| 方法及描述                                                   |
+| :----------------------------------------------------------- |
+| [file.close()](https://www.runoob.com/python3/python3-file-close.html)关闭文件。关闭后文件不能再进行读写操作。 |
+| [file.flush()](https://www.runoob.com/python3/python3-file-flush.html)刷新文件内部缓冲，直接把内部缓冲区的数据立刻写入文件, 而不是被动的等待输出缓冲区写入。 |
+| [file.fileno()](https://www.runoob.com/python3/python3-file-fileno.html)返回一个整型的文件描述符(file descriptor FD 整型), 可以用在如os模块的read方法等一些底层操作上。 |
+| [file.isatty()](https://www.runoob.com/python3/python3-file-isatty.html)如果文件连接到一个终端设备返回 True，否则返回 False。 |
+| [file.read([size\])](https://www.runoob.com/python3/python3-file-read.html)从文件读取指定的字节数，如果未给定或为负则读取所有。 |
+| [file.readline([size\])](https://www.runoob.com/python3/python3-file-readline.html)读取整行，包括 "\n" 字符。 |
+| [file.readlines([sizeint\])](https://www.runoob.com/python3/python3-file-readlines.html)读取所有行并返回列表，若给定sizeint>0，返回总和大约为sizeint字节的行, 实际读取值可能比 sizeint 较大, 因为需要填充缓冲区。 |
+| [file.seek(offset[, whence\])](https://www.runoob.com/python3/python3-file-seek.html)移动文件读取指针到指定位置 |
+| [file.tell()](https://www.runoob.com/python3/python3-file-tell.html)返回文件当前位置。 |
+| [file.truncate([size\])](https://www.runoob.com/python3/python3-file-truncate.html)从文件的首行首字符开始截断，截断文件为 size 个字符，无 size 表示从当前位置截断；截断之后后面的所有字符被删除，其中 windows 系统下的换行代表2个字符大小。 |
+| [file.write(str)](https://www.runoob.com/python3/python3-file-write.html)将字符串写入文件，返回的是写入的字符长度。 |
+| [file.writelines(sequence)](https://www.runoob.com/python3/python3-file-writelines.html)向文件写入一个序列字符串列表，如果需要换行则要自己加入每行的换行符。 |
+
+### 文件和文件夹操作
+
+```python
+import os #导入os模块
+
+#修改文件名
+os.rename(原文件名,新文件名)
+#删除文件
+os.remove(文件名)
+#创建文件夹
+os.mkdir(名称)
+#获取当前目录
+os.getcwd()
+#改变默认目录
+os.chdir(路径)
+#获取目录列表
+os.listdir(路径)
+#删除文件夹
+os.rmdir(路径)
+```
+
+## 面向对象
+
+### 类
+
+#### 类的定义语法:
+
+**类名遵循大驼峰规则**
+
+```python
+"""
+新式类:直接或间接继承object,py3中所有类都是object的子类(same as java)
+"""
+class Demo(object):
+    pass
+"""
+旧式类:已过时
+"""
+class Demo1():
+    pass
+
+class Demo2:
+    pass
+    
+    
+```
+
+#### 类中定义方法
+
+```python
+class Dog(Object):
+    def eat(self):  
+        print('吃')
+```
+
+### 对象
+
+创建对象语法:
+
+```Python
+class Dog(Object):
+    def eat(self):  
+        print('吃')
+
+
+dog1 = Dog()
+dog1.eat()
+#res
+吃
+```
+
+### 类外部添加和获取属性
+
+给对象添加属性:`对象.属性名 = 属性值`
+
+获取对象的属性`变量 = 对象.属性名`
+
+修改:和添加一样,添加存在的属性就是修改
+
+#### 魔法方法
+
+```bash
+python的类中,有一类方法,以`两个下划线开头`和`两个下划线结尾`,并在满足`某个特定条件下会自动调用`,这类方法,称为`魔法方法` magic method
+```
+
+`__init__`
+
+类似java中的构造方法,在创建对象之后自动调用
+
+作用:
+
+- 给对象添加属性,给对象属性一个初始值(构造方法)
+- 代码的业务需求,每创建一个对象,都需要执行的代码可以放在init方法中
+
+注意点:
+
+- 如果`__init__`方法出现了self之外的形参,在创建对象的时候,需要给额外的形参传值`类名(实参)` 这个类似java中的构造方法的有参构造
+
+```python
+class Dog(object):
+    def __init__(self,name):
+        self.name = name
+        print('init方法执行了')
+
+dog = Dog('大黄')
+print(dog.name)
+#res
+init方法执行了
+大黄
+```
+
+
+
+`__str__`
+
+类似java的`toString`:
+
+- 在print(对象)时会自动调用`__str__`方法,打印的结果是`__str__`方法的返回值
+- `str(对象)`将自定义类型转换为字符串的时候,会自动调用
+- 没有自定义`__str__`方法时,这个返回值是对象的地址
+
+注意点:
+
+- 方法必须返回一个字符串,只有self一个参数
+
+`__del__`
+
+对象在内存当中被销毁的时候调用:
+
+1. 程序代码结束,程序运行过程中创建的对象和变量都会被删除
+2. 使用`del 变量`语句删除,将这个对象的引用计数变为0,会自动调用
+
+引用计数:python内存管理的机制,指一块内存有多少变量在引用
+
+- 当一个变量引用一块内存时,引用计数+1
+- 删除一个变量或者这个变量不再引用这块内存,引用计数-1
+- 当内存的引用计数变为0,这块内存被删除,数据被销毁
+
+##### 补充:
+
+Java中JVM为了避免对象间存在循环依赖导致对象无法被回收,JVM的垃圾回收算法采用的是`可达性分析算法`,通过gc roots对象作为起始点,从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain），当一个对象到gc roots没有任何引用链相连时，则证明此对象是不可用的
+
+### 类内部添加和获取属性
+
+通过self操作:
+
+self指的是当前实例(类似java中的this),作为类中方法的第一个形参,在通过对象调用方法的时候,不需要手动传参
+
+python解释器会自动把调用方法的对象传递给self形参
+
+self也可以改成其他的形参名,但一般不修改这个名字,默认为self
+
+```python
+class Dog(object):
+    def play(self): 
+        print(f'{self.name}在玩耍')
+        
+dog = Dog()
+dog.name = '大黄'
+dog.play()
+
+#res
+大黄在玩耍
+```
+
+
+
+### 继承
+
+#### python中继承的语法
+
+- 单继承
+
+```python
+class Animal(object):
+    pass
+
+class Dog(Animal):
+    pass
+```
+
+- 多继承:python中允许多继承,java中是没有多继承的
+
+  
+
+```python
+class 马(object):
+    pass
+
+class 驴(object):
+    pass
+
+class 骡子(马,驴):
+    pass
+```
+
+​	**需要注意**:
+
+多继承中圆括号中父类的顺序，若是父类中有相同的方法名，而在子类使用时未指定，python从左至右搜索 即方法在子类中未找到时，从左到右查找父类中是否包含方法。
+
+#### 子类重写父类方法
+
+和java一样,子类重写父类中的同名方法,通过子类独对象调用方法时调用的是子类自己的方法
+
+#### 子类调用父类方法
+
+java中调用父类就用super,python有以下几种方式
+
+- 父类名.方法名(self,其他参数)
+- super(类A,self).方法名(参数),会调用类A的父类中的方法
+
+- super().方法名(参数)=>super(当前类,self).方法名(参数) 是第二中的简写,调用当前类的父类
+
+#### 继承中的init方法
+
+子类重写父类的init方法:在子类的init方法需要调用父类的init方法(和java也一样),给对象添加从父类继承的属性
+
+注意:子类init方法的形参,一般先写父类的形参,再写自己独有的形参
+
+```python
+class Dog(object):
+    def __init__(self,name):
+        self.name = name
+        self.age = 1
+       
+    def __str__(self):
+        return f'名字为{self.name},年龄为{self.age}'
+
+class MyDog(Dog):
+    def __init__(self,name,color):
+        super().__init__(name)
+        self.color = color
+        
+    def __str__(self):
+        return f'名字为{self.name},年龄为{self.age},颜色为{self.color}'
+    
+    
+dog = MyDog('大黄','黄色')
+print(dog)
+#res
+名字为大黄,年龄为1,颜色为黄色
+```
+
+### 封装
+
+封装的意义:
+
+- 将属性和方法放在一起作为一个整体,通过实例化对象来进行操作
+- 隐藏内部实现
+- 对类的属性和方法增加访问权限控制
+
+### 私有权限
+
+python没有java中的权限修饰符public/private之类的,私有的属性或者方法都由两个下划线开头
+
+- 普通的属性前面加两个下划线就是私有属性
+
+- 方法名前面加两个下划线就是私有方法
+
+和java一样私有属性不能被继承,私有方法不能在类外部访问,可以提供共有方法访问私有属性或私有方法
+
+### 类属性
+
+类似java中的静态变量
+
+访问:类名.类属性
+
+修改:类名.类属性 = 属性值
+
+### 类方法
+
+类方法:使用@classmethod装饰的方法称为类方法,第一个参数是cls,代表类对象自己
+
+注意:
+
+1. 如果在方法中使用了实例属性,那么该方法必须是实例方法,不能为类方法
+
+何时定义类方法:
+
+- 不需要使用实例属性,需要使用类属性
+
+调用:
+
+- 对象.类方法
+- 类名.类方法
+
+### 静态方法
+
+使用@staticmethod装饰的方法称为静态方法,对参数没有特殊要求,可以有,可以没有
+
+何时定义:
+
+- 不需要使用实例属性,也不需要使用类属性,可以定义方法为静态方法
+
+调用:
+
+- 对象.静态方法
+- 类名.静态方法
+
+### 多态
+
+由于python不需要声明变量类型,因此多态体现的不是那么直观,思想和java一样,可以使用父类的地方,也可以使用子类,**使用多态的意义在于提高应用的扩展性**
+
+
+
+
+
+## 异常
+
+### 组成:
+
+- 异常的类型
+- 异常的描述
+
+### 捕获单个异常
+
+```python
+try:
+    statement1
+except 异常名:
+    statement2
+```
+
+### 捕获多个异常
+
+```python
+try:
+    statement1
+except (异常1,异常2,...):
+    statement2
+    
+try:
+    statement1
+except 异常1:
+    statement2
+except 异常2:
+    statement3
+```
+
+### 打印异常信息
+
+```python
+try:
+    statement1
+except (异常1,异常2,...) as 变量名:
+    print(变量名)
+```
+
+### 捕获所有异常
+
+```python
+try:
+    statement1
+except: #缺点 不能获取异常信息
+    statement2
+    
+try:
+    statement1
+except Exception as 变量名: 
+    print(变量名)
+```
+
+### 异常的完整结构
+
+```python
+try:
+    statement1
+except Exception as e:
+    print(e)
+else:
+    代码没有发生异常会执行的代码块
+finally:
+    不管有没有异常都会执行的代码块
+```
+
+### 抛出自定义异常
+
+```python
+raise 异常对象
+
+
+
+异常对象 = 异常类(参数)
+
+
+抛出自定义异常:
+    1.自定义异常类,继承Exception或者BaseException
+    2.选择性定义__init__方法,__str__方法
+    3.抛出
 ```
 
