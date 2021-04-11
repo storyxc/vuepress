@@ -508,7 +508,26 @@ for x in it:
 在调用生成器运行的过程中，每次遇到 yield 时函数会暂停并保存当前所有的运行信息，返回 yield 的值, 并在下一次执行 next() 方法时从当前位置继续运行。
 
 调用一个生成器函数，返回的是一个迭代器对象。
-
+```python
+def gen_fun():
+    print('11111111111')
+    yield 1
+    print('22222222222')
+    yield 2
+    yield 3
+obj = gen_fun()
+print(obj)
+for i in obj:
+    print(i)
+#res
+<generator object gen_fun at 0x0000029394291AC0>
+11111111111
+1
+22222222222
+2
+3
+```
+上面的代码可以看到在调用函数过程中,'111111'和'222222222'并没有打印出来,而是在for循环中才执行,这就是因为yield导致了函数的暂停,而for循环实际底层是迭代器实现,所以才恢复到print语句的位置继续执行
 
 
 ## 函数
