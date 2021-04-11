@@ -7,14 +7,18 @@ module.exports = {
   description: '故事的vuepress博客',
   head: headConf,
   plugins: pluginsConf,
-  markdown: {
-    lineNumbers: true
-  },
+  // markdown: {
+  //   lineNumbers: true
+  // },
   themeConfig: {
     //logo: '/assets/img/story.jpg',
     lastUpdated: 'Last Updated',
     nav: navConf,
-    searchMaxSuggestions: 10,
+    repo: 'storyxc/vuepress',
+    docsDir: 'docs',
+    editLinks: true,
+    docsBranch: 'main',
+    editLinkText: '编辑',
     //displayAllHeaders: true,
     sidebar: {
       '/guide/': getGuideSidebar('指南' ,'博客历史' ,'关于我'),
