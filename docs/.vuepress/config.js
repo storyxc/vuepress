@@ -127,6 +127,7 @@ function getPythonSidebar(base, spider, web, others) {
       collapsable: false,
       children: [
         'python基础语法',
+        'python基础进阶',
       ]
     },
     {
