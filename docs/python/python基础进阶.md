@@ -185,6 +185,93 @@ if __name__ == '__main__':
 
 :::
 
+
+
+### 线程同步
+
+#### 线程优先级队列实现
+
+```python
+import queue
+import threading
+import time
+
+exitFlag = 0
+
+
+class MyThread(threading.Thread):
+    def __init__(self, thread_id, name, q):
+        super().__init__(name=name)
+        self.threadId = thread_id
+        self.name = name
+        self.q = q
+
+    def run(self):
+        print("开启线程: " + self.name)
+        process_data(self.name, self.q)
+        print("退出线程: " + self.name)
+
+
+def process_data(name, q):
+    while not exitFlag:
+        queueLock.acquire()
+        if not workQueue.empty():
+            data = q.get()
+            queueLock.release()
+            print(f"{name} processing {data}")
+        else:
+            queueLock.release()
+        time.sleep(1)
+
+
+threadList = ["Thread-1", "Thread-2", "Thread-3"]
+queueLock = threading.Lock()
+nameList = ["ONE", "TWO", "THREE", "FOUR", "FIVE"]
+workQueue = queue.Queue(10)
+threads = []
+threadId = 1
+
+for tname in threadList:
+    thread = MyThread(threadId, tname, workQueue)
+    thread.start()
+    threads.append(thread)
+    threadId += 1
+
+queueLock.acquire()
+for name in nameList:
+    workQueue.put(name)
+queueLock.release()
+
+while not workQueue.empty():
+    pass
+
+exitFlag = 1
+
+for t in threads:
+    t.join()
+
+print("主线程退出")
+```
+
+运行结果:
+
+```bash
+开启线程: Thread-1
+开启线程: Thread-2
+开启线程: Thread-3
+Thread-1 processing ONE
+Thread-2 processing TWO
+Thread-3 processing THREE
+Thread-2 processing FOUR
+Thread-1 processing FIVE
+退出线程: Thread-2
+退出线程: Thread-1
+退出线程: Thread-3
+主线程退出
+```
+
+
+
 ## python高级语法
 
 
