@@ -120,6 +120,8 @@ if __name__ == '__main__':
 
 ### 多线程的两种实现方式
 
+#### 通过threading模块的Thread类
+
 ```python
 import time
 import threading
@@ -137,8 +139,29 @@ def get_detail_url(url):
     time.sleep(2)
     print("get_detail_url_end")
 
+    
+if __name__ == '__main__':
+    thread1 = threading.Thread(target=get_detail_html, args=("",))
+    thread2 = threading.Thread(target=get_detail_url, args=("",))
+    start_time = time.time()
+    print(start_time)
+    # 当主线程退出时,子线程kill掉 -> 和java一样 setDaemon
+    thread1.setDaemon(True)
+    thread1.start()
+    thread2.start()
+    # 先执行其他线程再执行当前线程 -> 和java一样 join
+    # 主线程会等两个子线程执行完毕才执行
+    thread1.join()
+    thread2.join()
+    print("last time : {}".format(time.time() - start_time))
+```
 
-# 2.通过继承Thread类来实现多线程
+#### 通过继承Thread类
+
+```python
+import time
+import threading
+
 class GetDetailHtml(threading.Thread):
     def __init__(self, name):
         super().__init__(name=name)
@@ -158,8 +181,6 @@ class GetDetailUrl(threading.Thread):
 
 
 if __name__ == '__main__':
-    # thread1 = threading.Thread(target=get_detail_html, args=("",))
-    # thread2 = threading.Thread(target=get_detail_url, args=("",))
     thread1 = GetDetailHtml('thread1')
     thread2 = GetDetailUrl('thread2')
     start_time = time.time()
@@ -175,6 +196,8 @@ if __name__ == '__main__':
     print("last time : {}".format(time.time() - start_time))
 ```
 
+
+
 **其它:** 
 
 `thread1 = threading.Thread(target=get_detail_html, args=("",)) `这种写法中,args参数之所只有一个`""`空串传入但要加`,`是因为python的语法为了区分单个数据元组和单个数据的,如果写成(3,)会被认为是一个元组,如果是(3),就无法区分是元组还是int类型的3.
@@ -188,6 +211,8 @@ if __name__ == '__main__':
 
 
 ### 线程同步
+
+#### 使用 Thread 对象的 Lock 和 Rlock实现
 
 #### 线程优先级队列实现
 
