@@ -5,15 +5,25 @@ module.exports = [
     { text: 'Java', link: '/java/' },
     { text: 'Python', link: '/python/' },
     {
-        text: '在线文档',
-        ariaLabel: 'Docs Menu',
+        text: '在线工具',
         items: [
-            { text: 'Java', link: 'https://www.runoob.com/java/java-tutorial.html' },
-            { text: 'Python', link: 'https://python3-cookbook.readthedocs.io/zh_CN/latest/index.html' },
-            { text: 'Vue', link: 'https://cn.vuejs.org/' },
-            { text: 'Vuepress', link: 'https://vuepress.vuejs.org/zh/' }
+            {
+                text: '文档', items: [
+                    { text: 'Java', link: 'https://www.runoob.com/java/java-tutorial.html' },
+                    { text: 'Python', link: 'https://python3-cookbook.readthedocs.io/zh_CN/latest/index.html' },
+                    { text: 'Vue', link: 'https://cn.vuejs.org/' },
+                    { text: 'Vuepress', link: 'https://vuepress.vuejs.org/zh/' }
+                ]
+            },
+            {
+                text: '在线编辑', items: [
+                    { text: 'JSON编辑器', link: 'https://www.bejson.com/jsoneditoronline' },
+                    { text: 'CRON表达式', link: 'https://cron.qqe2.com/' },
+                ]
+            }
         ]
+
     },
     { text: '壁纸', link: 'https://www.storyxc.com/images' },
-    { text: 'github', link: 'https://github.com/storyxc' },
+    { text: '关于我', link: '/guide/about' },
 ]

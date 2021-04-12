@@ -1,3 +1,7 @@
+---
+sidebarDepth: 2
+---
+
 # python基础进阶
 
 ## 网络编程
