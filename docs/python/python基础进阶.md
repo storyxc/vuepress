@@ -363,9 +363,187 @@ Thread-1 processing FIVE
 
 
 
+### 线程池
+
+```python
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import time
+
+
+def get_data(times):
+    time.sleep(times)
+    print("get data {} success".format(times))
+
+
+thread_pool = ThreadPoolExecutor(max_workers=2)
+task1 = thread_pool.submit(get_data, 3)
+task2 = thread_pool.submit(get_data, 2)
+
+datas = [1, 2, 3]
+# subit后直接返回
+all_tasks = [thread_pool.submit(get_data, data) for data in datas]
+# as_complete底层是生成器
+# for future in as_completed(all_tasks):
+#    res = future.result()
+#    print(res)
+for data in thread_pool.map(get_data, datas):
+    print("get {} data ".format(data))
+
+```
+
+线程池：
+
+- 主线程可以获取某一个线程的状态或任务的状态及返回值
+- 当一个线程完成的时候能立刻知道
+- futures可以让多线程和多进程编码接口一致
+
+
+
+## 多进程编程
+
+对于io操作来说，使用多线程
+
+对于耗cpu的操作，用多进程
+
+- 进程的切换代价高于多线程
+
+```python
+from concurrent.futures import ProcessPoolExecutor
+import multiprocessing
+import time
+
+
+# 多进程编程
+def get_html(n):
+    time.sleep(n)
+    return n
+
+
+if __name__ == '__main__':
+    # progress = multiprocessing.Process(target=get_html, args=(2,))
+    # print(progress.pid)
+    # progress.start()
+    # print(progress.pid)
+    # progress.join()
+    # print('main progress end')
+
+    # 使用进程池
+    pool = multiprocessing.Pool(multiprocessing.cpu_count())
+    # res = pool.apply_async(get_html, args=(3,))
+    # 不再接受任务
+    # pool.close()
+    # 等待所有任务完成
+    # pool.join()
+    # print(res)
+    # print(res.get())
+
+    # imap 按顺序
+    # for res in pool.imap(get_html, [1, 5, 3]):
+    #    print("{} sleep success".format(res))
+    # imap_unordered 按完成时间
+    for res in pool.imap_unordered(get_html, [1, 5, 3]):
+        print("{} sleep success".format(res))
+```
+
+
+
+### 进程间通信
+
+- 使用multiprocessing中的Queue 用法和threading的Queue类似
+- 全局共享变量不适用与进程间通信（进程间的数据是隔离的）
+- multiprocessing中的Queue不能用于进程池pool中的进程通信
+- pool中的进程间通信需要使用multiprocessing中的Manager实例化后的queue（Manager().Queue())
+- 使用Pipe管道实现进程间通信 receive，send = Pipe() 只能适用于两个进程间通信
+- Manager().dict()等数据结构进行进程间通信
+
 ## python高级语法
 
+### 函数式编程
+
+函数式编程的思维各种语言都一样，python提供的有`filter()`，`map()`这类函数
+
+### 闭包
+
+简单的说，返回值是一个函数的函数就是闭包，通过闭包可以创建一些只有当前函数才能访问的变量，可以将一些私有的数据藏到闭包中
+
+#### 形成闭包的条件
+
+- 函数嵌套
+- 将内部函数作为返回值返回
+- 内部函数必须要使用到外部函数的变量
 
 
-## 正则表达式
 
+### 装饰器
+
+思想上就是设计模式中的装饰器模式，在不修改原有函数的基础上进行功能的增强。
+
+例如decorator就是一个装饰器：
+
+```python
+def func_add(a, b):
+    return a + b
+
+
+def decorator(func):
+    def decorate_func(*args, **kwargs):
+        print("这是一个方法的前置增强")
+        res = func(*args, **kwargs)
+        print(f"被增强的方法执行了,结果是{res}")
+        print("这是一个方法的后置增强")
+        return res
+
+    return decorate_func
+
+
+my_func = decorator(func_add)
+res_func = my_func(123, 456)
+print(f"最终的返回值是{res_func}")
+```
+
+执行结果：
+
+```bash
+这是一个方法的前置增强
+被增强的方法执行了,结果是579
+这是一个方法的后置增强
+最终的返回值是579
+```
+
+#### 装饰器的典型用法
+
+```python
+def decorator(func):
+    def decorate_func(*args, **kwargs):
+        print("这是一个方法的前置增强")
+        res = func(*args, **kwargs)
+        print(f"被增强的方法执行了,结果是{res}")
+        print("这是一个方法的后置增强")
+        return res
+
+    return decorate_func
+
+@decorator
+def say_hello():
+    print("hello")
+    
+say_hello()
+```
+
+结果:
+
+```bash
+这是一个方法的前置增强
+hello
+被增强的方法执行了,结果是None
+这是一个方法的后置增强
+```
+
+@property装饰器:
+
+- 用来将get方法转换为对象的属性
+- 使用property装饰的方法必须和属性名一样
+
+@属性名.setter:
+
+- setter方法的装饰器,@属性名.setter
