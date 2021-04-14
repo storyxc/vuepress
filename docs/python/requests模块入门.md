@@ -164,3 +164,54 @@ if __name__ == '__main__':
     print('over')
 ```
 
+## 国家药品管理局化妆品生产许可信息
+
+```python
+import requests
+import json
+
+if __name__ == '__main__':
+    # 列表页ajax
+    url = 'http://scxk.nmpa.gov.cn:81/xk/itownet/portalAction.do?method=getXkzsList'
+    # 详情页ajax
+    detail_url = 'http://scxk.nmpa.gov.cn:81/xk/itownet/portalAction.do?method=getXkzsById'
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36'
+    }
+    params = {
+        'on': True,
+        'page': 1,
+        'pageSize': 15,
+        'productName': '',
+        'conditionType': 1,
+        'applyname': '',
+        'applysn': ''
+    }
+
+    detail_params = {
+        'id': ''
+    }
+    # 数据容器
+    data_list = []
+    # 列表页响应
+    response = requests.post(url=url, params=params, headers=headers)
+    res_obj = response.json()
+    # 提取列表信息遍历
+    res_list = res_obj.get('list')
+    for data in res_list:
+        # id是详情页请求的参数
+        detail_id = data.get('ID')
+        detail_params['id'] = detail_id
+        # 详情页响应
+        resp = requests.post(url=detail_url, params=detail_params, headers=headers)
+        res_obj = resp.json()
+        # 容器保存
+        data_list.append(res_obj)
+    # 持久化存储
+    with open('make_up_xkz.json', 'a', encoding='utf-8') as f:
+        json.dump(data_list, f, ensure_ascii=False)
+    print('over')
+
+```
+
