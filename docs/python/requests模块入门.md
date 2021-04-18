@@ -215,3 +215,132 @@ if __name__ == '__main__':
 
 ```
 
+
+
+
+
+## 正则表达式匹配
+
+### 爬取糗事百科图片
+
+```python
+import requests
+import re
+
+if __name__ == '__main__':
+    for i in range(13):
+        page_no = str(i + 1)
+        url = 'https://www.qiushibaike.com/imgrank/page/%d'
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36'
+        }
+        url = format(url % page_no)
+        page_txt = requests.get(url=url, headers=headers).text
+        exp = '<div class="thumb">.*?<img src="(.*?)" alt.*?</div>'
+        src_list = re.findall(exp, page_txt, re.S)
+        # print(src_list)
+        for src in src_list:
+            url = 'https:' + src
+            # 向图片url发请求保存
+            stream = requests.get(url=url, headers=headers).content
+            # 文件名
+            src = src.split('/')[-1]
+            img_path = './img/' + src
+            f = open(img_path, 'wb')
+            f.write(stream)
+            print(img_path, '下载成功')
+
+```
+
+
+
+
+
+## XPath解析
+
+### 解析58二手房标题
+
+```python
+from lxml import etree
+import requests
+
+if __name__ == '__main__':
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36'
+    }
+    url = 'https://bj.58.com/ershoufang/'
+    page_text = requests.get(url=url, headers=headers).text
+    tree = etree.HTML(page_text)
+    div_list = tree.xpath('//div[@class="property"]')
+    with open('58.txt', 'w', encoding='utf-8') as f:
+        for div in div_list:
+            title = div.xpath('.//h3[@class="property-content-title-name"]/text()')
+            f.write(title[0]+'\r\n')
+```
+
+### 多线程爬取美女图片
+
+```python
+import requests
+from lxml import etree
+import os
+from concurrent.futures import ThreadPoolExecutor
+
+
+def download_pic(page_no, real_url, first_page_url, ):
+    print('=============开始下载第 ' + str(page_no) + ' 页=================')
+    if not page_no == 1:
+        pattern = '_' + str(page_no)
+        init_url = format(real_url % pattern)
+    else:
+        init_url = first_page_url
+    down_page_text = requests.get(url=init_url, headers=headers).text
+    down_tree = etree.HTML(down_page_text)
+    li_list = down_tree.xpath('//div[@class="slist"]//li')
+    for li in li_list:
+        img_url = 'https://pic.netbian.com' + li.xpath('.//img/@src')[0]
+        img_name = li.xpath('.//img/@alt')[0] + '.jpg'
+        img_name = img_name.encode('iso-8859-1').decode('gbk')
+        with open('./beauty/' + img_name, 'wb') as f:
+            stream = requests.get(url=img_url, headers=headers).content
+            f.write(stream)
+            print(img_name, ' 下载成功')
+
+
+if __name__ == '__main__':
+    url = 'https://pic.netbian.com/4kmeinv/index.html'
+    next_url = 'https://pic.netbian.com/4kmeinv/index%s.html'
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36'
+    }
+
+    if not os.path.exists('./beauty'):
+        os.mkdir('./beauty')
+    page_text = requests.get(url=url, headers=headers).text
+    tree = etree.HTML(page_text)
+    page_info = tree.xpath('//div[@class="page"]/a[7]/text()')
+    total_page_no = int(page_info[0])
+    thread_pool = ThreadPoolExecutor(max_workers=60)
+    for i in range(total_page_no):
+        i += 1
+        thread_pool.submit(download_pic, i, next_url, url)
+
+```
+
+### 全国城市名称爬取
+
+```python
+import requests
+from lxml import etree
+
+if __name__ == '__main__':
+    url = 'https://www.aqistudy.cn/historydata'
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36'
+    }
+    page_text = requests.get(url=url, headers=headers).text
+    tree = etree.HTML(page_text)
+    cities = tree.xpath('//div[@class="bottom"]/ul//li/a/text()')
+    print(len(cities))
+```
+
