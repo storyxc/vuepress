@@ -138,7 +138,9 @@ function getPythonSidebar(base, spider, web, others) {
       title: spider,
       collapsable: false,
       children: [
-        'requests模块入门'
+        'requests模块入门',
+        '验证码识别和模拟登录',
+        '多线程爬取梨视频网站的热门视频'
       ]
     },
     {
