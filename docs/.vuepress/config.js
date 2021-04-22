@@ -132,6 +132,7 @@ function getPythonSidebar(base, spider, web, others) {
       children: [
         'python基础语法',
         'python基础进阶',
+        '异步编程',
       ]
     },
     {
