@@ -141,7 +141,8 @@ function getPythonSidebar(base, spider, web, others) {
       children: [
         'requests模块入门',
         '验证码识别和模拟登录',
-        '多线程爬取梨视频网站的热门视频'
+        '多线程爬取梨视频网站的热门视频',
+        'selenium模块',
       ]
     },
     {
