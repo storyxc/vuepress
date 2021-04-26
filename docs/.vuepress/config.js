@@ -109,6 +109,7 @@ function getJavaSidebar(base, frame, midware, db, designpattern, tools, others) 
         'git命令整理',
         'Typora、PicGo、七牛云实现markdown图片自动上传图床',
         'Maven的生命周期',
+        'Docker Desktop安装',
       ]
     },
     {
