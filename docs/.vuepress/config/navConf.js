@@ -1,9 +1,15 @@
 module.exports = [
     { text: '首页', link: '/' },
     { text: '指南', link: '/guide/' },
-
-    { text: 'Java', link: '/java/' },
-    { text: 'Python', link: '/python/' },
+    {
+        text: '后端',
+        items: [
+            { text: 'Java', link: '/java/' },
+            { text: 'Python', link: '/python/' },
+            { text: '实践', link: '/actions/'},
+            //{ text: '内功', link: '/base/'},
+        ]
+    },
     {
         text: '在线工具',
         items: [

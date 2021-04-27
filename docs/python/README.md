@@ -11,7 +11,7 @@
 
 ## intro
 python模块的分类：
-- python基础： TODO
-- python爬虫： TODO
-- pythonWeb： TODO
-- 其他： TODO
+- python基础
+- python爬虫
+- pythonWeb
+- 脚本及其他

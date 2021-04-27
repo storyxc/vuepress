@@ -21,9 +21,11 @@ module.exports = {
     editLinkText: '编辑',
     //displayAllHeaders: true,
     sidebar: {
-      '/guide/': getGuideSidebar('指南' ,'博客历史' ,'关于我'),
-      '/java/': getJavaSidebar('Java基础', 'Java框架', '中间件', '数据库', '设计模式', '开发工具', '其他'),
-      '/python/': getPythonSidebar('Python基础', 'Python爬虫', 'PythonWeb', '其他')
+      '/guide/': getGuideSidebar('指南', '博客历史', '关于我'),
+      '/java/': getJavaSidebar('Java基础', 'Java框架', '中间件', '数据库', '开发工具', '其他'),
+      '/python/': getPythonSidebar('Python基础', 'Python爬虫', 'PythonWeb', '脚本及其他'),
+      '/actions/': getActionSidebar('工具', '设计模式'),
+      //'/base/': getBaseSidebar('计算机网络', '数据结构与算法', '操作系统', '计算机组成原理'),
     }
   }
 }
@@ -54,7 +56,7 @@ function getGuideSidebar(groupA, groupB, groupC) {
   ]
 }
 
-function getJavaSidebar(base, frame, midware, db, designpattern, tools, others) {
+function getJavaSidebar(base, frame, midware, db, tools, others) {
   return [
     {
       title: base,
@@ -63,7 +65,7 @@ function getJavaSidebar(base, frame, midware, db, designpattern, tools, others) 
       children: [
         'String类的深入学习',
         'JDK1.8 HashMap源码学习',
-        
+
       ]
     },
     {
@@ -95,13 +97,6 @@ function getJavaSidebar(base, frame, midware, db, designpattern, tools, others) 
       ]
     },
     {
-      title: designpattern,
-      collapsable: false,
-      children: [
-        '策略模式的具体实现',
-      ]
-    },
-    {
       title: tools,
       collapsable: false,
       children: [
@@ -109,7 +104,7 @@ function getJavaSidebar(base, frame, midware, db, designpattern, tools, others) 
         'git命令整理',
         'Typora、PicGo、七牛云实现markdown图片自动上传图床',
         'Maven的生命周期',
-        'Docker Desktop安装',
+
       ]
     },
     {
@@ -151,14 +146,66 @@ function getPythonSidebar(base, spider, web, others) {
       title: web,
       collapsable: false,
       children: [
-        
+
       ]
     },
     {
       title: others,
       collapsable: false,
       children: [
-        
+
+      ]
+    }
+  ]
+}
+
+function getActionSidebar(groupA, groupB) {
+  return [
+    {
+      title: groupA,
+      collapsable: false,
+      children: [
+        'Docker Desktop安装',
+      ]
+    },
+    {
+      title: groupB,
+      collapsable: false,
+      children: [
+        '策略模式的具体实现',
+      ]
+    }
+  ]
+}
+
+function getBaseSidebar(net, data, os, comp) {
+  return [
+    {
+      title: net,
+      collapsable: false,
+      children: [
+        ''
+      ]
+    },
+    {
+      title: data,
+      collapsable: false,
+      children: [
+        '',
+      ]
+    },
+    {
+      title: os,
+      collapsable: false,
+      children: [
+        ''
+      ]
+    },
+    {
+      title: comp,
+      collapsable: false,
+      children: [
+        ''
       ]
     }
   ]
