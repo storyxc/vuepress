@@ -166,6 +166,9 @@ function getActionSidebar(tools, design) {
       collapsable: false,
       children: [
         'Docker Desktop安装',
+        'git命令整理',
+        'Markdown基础语法',
+        'Typora、PicGo、七牛云实现markdown图片自动上传图床',
       ]
     },
     {
