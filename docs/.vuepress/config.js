@@ -100,9 +100,6 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
       title: tools,
       collapsable: false,
       children: [
-        'Markdown基础语法',
-        'git命令整理',
-        'Typora、PicGo、七牛云实现markdown图片自动上传图床',
         'Maven的生命周期',
 
       ]
