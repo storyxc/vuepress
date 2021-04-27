@@ -24,7 +24,7 @@ module.exports = {
       '/guide/': getGuideSidebar('指南', '博客历史', '关于我'),
       '/java/': getJavaSidebar('Java基础', 'Java框架', '中间件', '数据库', '开发工具', '其他'),
       '/python/': getPythonSidebar('Python基础', 'Python爬虫', 'PythonWeb', '脚本及其他'),
-      '/actions/': getActionSidebar('工具', '设计模式'),
+      '/actions/': getActionSidebar('工具', '设计模式','其他'),
       //'/base/': getBaseSidebar('计算机网络', '数据结构与算法', '操作系统', '计算机组成原理'),
     }
   }
@@ -159,22 +159,29 @@ function getPythonSidebar(base, spider, web, others) {
   ]
 }
 
-function getActionSidebar(groupA, groupB) {
+function getActionSidebar(tools, design,others) {
   return [
     {
-      title: groupA,
+      title: tools,
       collapsable: false,
       children: [
         'Docker Desktop安装',
       ]
     },
     {
-      title: groupB,
+      title: design,
       collapsable: false,
       children: [
         '策略模式的具体实现',
       ]
-    }
+    },
+    {
+      title: others,
+      collapsable: false,
+      children: [
+        '',
+      ]
+    },
   ]
 }
 
