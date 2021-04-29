@@ -101,7 +101,6 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
       collapsable: false,
       children: [
         'Maven的生命周期',
-
       ]
     },
     {
@@ -137,6 +136,7 @@ function getPythonSidebar(base, spider, web, others) {
         '验证码识别和模拟登录',
         '多线程爬取梨视频网站的热门视频',
         'selenium模块',
+        'python配合ffmpeg下载bilibili视频',
       ]
     },
     {
