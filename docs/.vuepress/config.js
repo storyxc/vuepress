@@ -143,7 +143,8 @@ function getPythonSidebar(base, spider, web, others) {
       title: web,
       collapsable: false,
       children: [
-
+        'pymysql使用',
+        'Django入门',
       ]
     },
     {

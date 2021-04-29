@@ -1,4 +1,4 @@
-# python配合ffmpeg下载b站视频
+# python配合ffmpeg下载bilibili视频
 
 直接上代码
 
@@ -12,7 +12,7 @@
 
 - 另外，使用subprocess.Popen调用FFmpeg的cmd命令可能会出现乱码，目前不知道原因，可以尝试使用os.system(cmd)代替，等搞懂再更新。
 
-```
+```python
 import requests
 import re
 import json
