@@ -167,6 +167,7 @@ function getActionSidebar(tools, design) {
         'git命令整理',
         'Markdown基础语法',
         'Typora、PicGo、七牛云实现markdown图片自动上传图床',
+        '微信敏感数据对称解密工具类',
       ]
     },
     {
