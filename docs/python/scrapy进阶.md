@@ -174,7 +174,7 @@ ITEM_PIPELINES = {
 
 ::: danger
 
-这里直接运行不会报错,但是会发现也没有下载成功,但是实际上url已经能拿到了,把日志的级别放开后拿到配置文件会发现有一句` 2021-05-01 13:22:48 [scrapy.middleware] WARNING: Disabled ImgsPipeline: ImagesPipeline requires installing Pillow 4.0.0 or later`
+这里直接运行不会报错,但是会发现也没有下载成功,但是实际上url已经能拿到了,把日志的级别放开后,查看日志信息会发现有一句` 2021-05-01 13:22:48 [scrapy.middleware] WARNING: Disabled ImgsPipeline: ImagesPipeline requires installing Pillow 4.0.0 or later`
 
 提示使用ImagesPipeline还需要安装下pillow :`pip install pillow`
 

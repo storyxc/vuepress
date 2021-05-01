@@ -140,6 +140,8 @@ function getPythonSidebar(base, spider, web, others) {
         'python配合ffmpeg下载bilibili视频',
         'scrapy框架入门',
         'scrapy进阶',
+        'CrawlSpider全站爬取',
+        '分布式爬虫和增量式爬虫',
       ]
     },
     {
@@ -170,7 +172,7 @@ function getActionSidebar(tools, design) {
         'git命令整理',
         'Markdown基础语法',
         'Typora、PicGo、七牛云实现markdown图片自动上传图床',
-        
+        'Centos7安装Python3环境',
       ]
     },
     {
