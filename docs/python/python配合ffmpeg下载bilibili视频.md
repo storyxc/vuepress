@@ -58,6 +58,9 @@ def download(info_list, info):
     desktop = os.path.join(os.path.expanduser("~"), 'Desktop')
     video_path = desktop + '\\' + info
     audio_path = desktop + '\\' + info + '_.mp3'
+    # 如果视频名称中有'-' 执行ffmpeg合并的时候会报错
+    video_path = video_path.replace('-',' ')
+    audio_path = audio_path.replace('-',' ')
     with open(video_path + '_temp.mp4', 'wb') as f:
         f.write(video_data)
     with open(audio_path, 'wb') as f:
@@ -65,9 +68,7 @@ def download(info_list, info):
     cmd = 'ffmpeg -y -i ' + video_path + '_temp.mp4' + ' -i ' \
           + audio_path + ' -c:v copy -c:a aac -strict experimental ' + video_path + '.mp4'
     print(cmd)
-    # 方式1
     subprocess.Popen(cmd, shell=True)
-    # 方式2
     # os.system(cmd)
     print('下载完成')
 
@@ -75,8 +76,8 @@ def download(info_list, info):
 if __name__ == '__main__':
     url = input('请输入要下载的b站视频链接:')
     page_data = send_request(url)
-    title = re.findall('<span class="tit">(.*?)</span>', page_data)[0]
+    # 解析视频的名称
+    title = re.findall('<h1 title=\"(.*?)\" class=\"video-title', page_data)[0]
     play_info_list = get_play_info(page_data)
     download(play_info_list, title)
-
 ```

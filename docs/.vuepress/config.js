@@ -112,6 +112,7 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
         'POI踩坑-zip file is closed',
         'OpenJDK没有jstack等命令的解决办法',
         'ribbon刷新服务列表间隔和canal的坑',
+        '微信敏感数据对称解密工具类',
       ]
     }
   ]
@@ -137,6 +138,8 @@ function getPythonSidebar(base, spider, web, others) {
         '多线程爬取梨视频网站的热门视频',
         'selenium模块',
         'python配合ffmpeg下载bilibili视频',
+        'scrapy框架入门',
+        'scrapy进阶',
       ]
     },
     {
@@ -167,7 +170,7 @@ function getActionSidebar(tools, design) {
         'git命令整理',
         'Markdown基础语法',
         'Typora、PicGo、七牛云实现markdown图片自动上传图床',
-        '微信敏感数据对称解密工具类',
+        
       ]
     },
     {
