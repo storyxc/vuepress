@@ -397,3 +397,20 @@ ITEM_PIPELINES = {
 运行结果：
 
 ![image-20210501172946555](https://io.storyxc.com/image-20210501172946555.png)
+
+## scrapy调试
+
+- pycharm中编辑运行/debug配置
+
+- 点击加号添加一个新的配置,选择python,给配置命个名,比如scrapy
+- script path选择python目录下的`Lib/site-packages/scrapycmdline.py`
+
+- parameter填`crawl yourSpiderName`
+- working directory填写爬虫项目路径
+
+- 保存,再debug运行scrapy这个配置就行
+
+例如:
+
+![image-20210502101609233](https://io.storyxc.com/image-20210502101609233.png)
+
