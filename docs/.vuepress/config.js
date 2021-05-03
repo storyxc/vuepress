@@ -157,7 +157,7 @@ function getPythonSidebar(base, spider, web, others) {
       title: others,
       collapsable: false,
       children: [
-
+        'argparse模块入门',
       ]
     }
   ]
