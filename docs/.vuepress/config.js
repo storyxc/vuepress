@@ -174,6 +174,7 @@ function getActionSidebar(tools, design) {
         'Markdown基础语法',
         'Typora、PicGo、七牛云实现markdown图片自动上传图床',
         'Centos7安装Python3环境',
+        'git配置socks5代理解决github上down代码慢的问题',
       ]
     },
     {
