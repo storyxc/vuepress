@@ -307,9 +307,9 @@ class KototoPipeline(FilesPipeline):
     def get_media_requests(self, item, info):
         """
         使用的是之前下载单个b站视频博客中的逻辑,没有通过框架的手段下载
-        :param item: 
-        :param info: 
-        :return: 
+        :param item:
+        :param info:
+        :return:
         """
         video = item['video_url']
         audio = item['audio_url']
@@ -322,6 +322,19 @@ class KototoPipeline(FilesPipeline):
             f.write(video_data)
         with open(audio_path, 'wb') as f:
             f.write(audio_data)
+
+    def file_path(self, request, response=None, info=None, *, item=None):
+        pass
+
+    def item_completed(self, results, item, info):
+        return item
+
+
+class MergePipeline(object):
+    def process_item(self, item, spider):
+        video_temp_path = item['video_temp_path']
+        audio_path = item['audio_path']
+        video_path = item['video_path']
         cmd = 'ffmpeg -y -i ' + video_temp_path + ' -i ' \
               + audio_path + ' -c:v copy -c:a aac -strict experimental ' + video_path
         print(cmd)
@@ -331,11 +344,6 @@ class KototoPipeline(FilesPipeline):
         os.remove(audio_path)
         print(video_path, '下载完成')
 
-    def file_path(self, request, response=None, info=None, *, item=None):
-        pass
-
-    def item_completed(self, results, item, info):
-        return item
 ```
 
 ## settings
@@ -364,8 +372,12 @@ DOWNLOADER_MIDDLEWARES = {
 }
 
 ITEM_PIPELINES = {
-   'kototo.pipelines.KototoPipeline': 300,
+    # 下载
+   'kototo.pipelines.KototoPipeline': 1,
+   # 合并
+    'kototo.pipelines.MergePipeline': 2,
 }
+
 ```
 
 
@@ -394,6 +406,3 @@ ITEM_PIPELINES = {
 
 已经爬取过的资源会提示已经下载过，只会处理更新的内容。
 
-## 总结
-
-这个小demo已经实现了基本的增量式爬虫，不过没有引入异步io等操作，因此效率比较低
