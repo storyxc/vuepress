@@ -31,11 +31,11 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
   - 虚拟机的静态ip和真机的必须在同一网段,添加谷歌的dns解析
   - 虚拟机内的配置
 
-  ![image-20210505171618465](http://image.storyxc.com/image-20210505171618465.png)
+  ![image-20210505171618465](https://io.storyxc.com/image-20210505171618465.png)
 
   - 真机的ip信息
 
-    ![image-20210505171651704](http://image.storyxc.com/image-20210505171651704.png)
+    ![image-20210505171651704](https://io.storyxc.com/image-20210505171651704.png)
 
 ## 环境搭建
 
@@ -104,7 +104,7 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
 
   - 安装后切换到/usr/local/nginx/sbin启动nginx并访问
 
-    ![image-20210505174840552](http://image.storyxc.com/image-20210505174840552.png)
+    ![image-20210505174840552](https://io.storyxc.com/image-20210505174840552.png)
 
 - 开放端口
   - 查看已经开放的端口`firewall-cmd --list-ports`
