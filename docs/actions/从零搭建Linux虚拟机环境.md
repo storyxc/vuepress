@@ -40,8 +40,22 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
 ## 环境搭建
 
 - JDK1.8
-  - `yum search openjdk`
-  - `yum install xxx`
+  - oracle官网下载jdk后上传虚拟机
+
+  - 解压并配置环境变量
+
+    `vi /etc/profile/`
+
+    ```bash
+    JAVA_HOME=/usr/local/java/jdk1.8.0_291
+    PATH=$JAVA_HOME/bin:$PATH
+    CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/jre/lib/rt.jar
+    export JAVA_HOME
+    export CLASSPATH
+    export PATH
+    ```
+
+  - 重启虚拟机使环境变量生效或者`source /etc/profile`
 - python3
   - 见另一篇博客 [centos7安装python环境](https://blog.storyxc.com/actions/Centos7%E5%AE%89%E8%A3%85Python3%E7%8E%AF%E5%A2%83.html)
 
@@ -143,4 +157,7 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
       ```
   
       
+  
+- kafka
 
+  - `wget https://mirror-hk.koddos.net/apache/kafka/2.8.0/kafka_2.13-2.8.0.tgz`
