@@ -86,6 +86,7 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
         '分布式锁解决方案',
         '关于消息中间件MQ',
         'kafka学习记录',
+        'kakfa实践',
       ]
     },
     {
@@ -112,7 +113,7 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
         'POI踩坑-zip file is closed',
         'OpenJDK没有jstack等命令的解决办法',
         'ribbon刷新服务列表间隔和canal的坑',
-        '微信敏感数据对称解密工具类',
+        '微信小程序加密数据对称解密工具类',
       ]
     }
   ]
