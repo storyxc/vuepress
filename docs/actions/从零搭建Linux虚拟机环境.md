@@ -156,8 +156,86 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
       echo "source /opt/rh/devtoolset-9/enable" >>/etc/profile # 永久启用新版gcc
       ```
   
+  - 开机自启redis
+  
+    - ```bash
+      vi /etc/init.d/redis
+      ```
+  
+    - ```bash
+      #!/bin/sh
+      # chkconfig: 2345 10 90
+      # description: Start and Stop redis
       
+      REDISPORT=6379
+      EXEC=/usr/local/redis/bin/redis-server
+      CLIEXEC=/usr/local/redis/bin/redis-cli
+      
+      PIDFILE=/var/run/redis_${REDISPORT}.pid
+      CONF="/usr/local/redis/redis.conf"
+      
+      case "$1" in
+          start)
+              if [ -f $PIDFILE ]
+              then
+                      echo "$PIDFILE exists, process is already running or crashed"
+              else
+                      echo "Starting Redis server..."
+                      $EXEC $CONF &
+              fi
+              ;;
+          stop)
+              if [ ! -f $PIDFILE ]
+              then
+                      echo "$PIDFILE does not exist, process is not running"
+              else
+                      PID=$(cat $PIDFILE)
+                      echo "Stopping ..."
+                      $CLIEXEC -p $REDISPORT shutdown
+                      while [ -x /proc/${PID} ]
+                      do
+                          echo "Waiting for Redis to shutdown ..."
+                          sleep 1
+                      done
+                      echo "Redis stopped"
+              fi
+              ;;
+          restart)
+              "$0" stop
+              sleep 3
+              "$0" start
+              ;;
+          *)
+              echo "Please use start or stop or restart as first argument"
+              ;;
+      esac
+      ```
+  
+    - ```bash
+      vim /usr/local/redis/redis.conf
+      修改
+      bind 0.0.0.0 #所有ipv4端口
+      protected-mode no # 关闭保护模式
+      daemonize yes # 守护进程
+      ```
+  
+    - ```bash
+      # 授权
+      chmod 777 /etc/init.d/redis
+      ```
+  
+    - ```bash
+      # 开机启动
+      chkconfig redis on
+      ```
+  
+    - ```bash
+      # 创建客户端软链接
+      ln -s /usr/local/redis/bin/redis-cli /usr/local/bin/redis-cli 
+      ```
   
 - kafka
 
   - `wget https://mirror-hk.koddos.net/apache/kafka/2.8.0/kafka_2.13-2.8.0.tgz`
+  
+  
