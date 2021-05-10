@@ -53,6 +53,10 @@ class KototoSpider(scrapy.Spider):
         space_url = 'https://space.bilibili.com/17485141/video'
         # 初始化需要爬取的列表页
         self.init_start_urls(self.start_urls, space_url)
+        # 创建桌面文件夹
+        self.desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop\\' + self.name + '\\')
+        if not os.path.exists(self.desktop_path):
+            os.mkdir(self.desktop_path)
 
     def parse(self, response):
         """
@@ -79,18 +83,15 @@ class KototoSpider(scrapy.Spider):
         play_info_list = self.get_play_info(response)
         # 这里使用mysql的唯一索引实现增量爬取,如果是服务器上跑也可以用redis
         if self.insert_info(title, play_info_list[1]):
-            desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop\\kototo\\')
-            video_temp_path = (desktop_path + title + '_temp.mp4').replace('-', '')
-            video_path = desktop_path + title + '.mp4'
-            audio_path = desktop_path + title + '.mp3'
+            video_temp_path = (self.desktop_path + title + '_temp.mp4').replace('-', '')
+            video_path = self.desktop_path + title + '.mp4'
+            audio_path = self.desktop_path + title + '.mp3'
             item = KototoItem()
             item['video_url'] = play_info_list[0]
             item['audio_url'] = play_info_list[1]
             item['video_path'] = video_path
             item['audio_path'] = audio_path
             item['video_temp_path'] = video_temp_path
-            item['file_urls'] = ['test']
-            item['files'] = 'test'
             yield item
         else:
             print(title + ': 已经下载过了!')
@@ -273,8 +274,6 @@ class KototoDownloaderMiddleware:
 
 ## Item
 
-由于使用FilePipeline，file_urls和files参数是必须要的，但实际上本案例中没有用到，不过还是要加上
-
 ```python
 import scrapy
 
@@ -285,15 +284,11 @@ class KototoItem(scrapy.Item):
     audio_path = scrapy.Field()
     audio_url = scrapy.Field()
     video_temp_path = scrapy.Field()
-    file_urls = scrapy.Field()# 必须的
-    files = scrapy.Field() # 必须的
 ```
 
 ## Pipeline
 
 ```python
-from itemadapter import ItemAdapter
-from scrapy.pipelines.files import FilesPipeline
 import requests
 import os
 
@@ -303,18 +298,11 @@ headers = {
 }
 
 
-class KototoPipeline(FilesPipeline):
-    def get_media_requests(self, item, info):
-        """
-        使用的是之前下载单个b站视频博客中的逻辑,没有通过框架的手段下载
-        :param item:
-        :param info:
-        :return:
-        """
+class KototoPipeline(object):
+    def process_item(self, item, spider):
         video = item['video_url']
         audio = item['audio_url']
         video_temp_path = item['video_temp_path']
-        video_path = item['video_path']
         audio_path = item['audio_path']
         video_data = requests.get(url=video, headers=headers).content
         audio_data = requests.get(url=audio, headers=headers).content
@@ -322,15 +310,14 @@ class KototoPipeline(FilesPipeline):
             f.write(video_data)
         with open(audio_path, 'wb') as f:
             f.write(audio_data)
-
-    def file_path(self, request, response=None, info=None, *, item=None):
-        pass
-
-    def item_completed(self, results, item, info):
         return item
 
 
 class MergePipeline(object):
+    """
+    删除临时文件
+    """
+
     def process_item(self, item, spider):
         video_temp_path = item['video_temp_path']
         audio_path = item['audio_path']
@@ -343,6 +330,7 @@ class MergePipeline(object):
         os.remove(video_temp_path)
         os.remove(audio_path)
         print(video_path, '下载完成')
+        return item
 
 ```
 
