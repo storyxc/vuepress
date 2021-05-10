@@ -71,7 +71,7 @@ bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-fac
 
 查看已创建的topic信息
 
-```bash
+​```bash
 [root@localhost kafka_2.13-2.8.0]# bin/kafka-topics.sh --describe --topic quickstart-events --bootstrap-server localhost:9092
 Topic: quickstart-events        TopicId: iOM06pJVQV-y_A6QkmfeHw PartitionCount: 1       ReplicationFactor: 1  Configs: segment.bytes=1073741824
         Topic: quickstart-events        Partition: 0    Leader: 0       Replicas: 0     Isr: 0
@@ -121,4 +121,142 @@ hello world
 this is first kafka message
 
 可以看到,新的消费者又消费到了刚才的消息
+
+
+```
+
+## Kafka的Java客户端
+
+### 依赖
+
+```xml
+<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-streams</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+```
+
+### 修改kafka配置
+
+```bash
+修改config/server.properties
+listeners=PLAINTEXT://你的ip地址:9092
+比如我的:
+listeners=PLAINTEXT://192.168.174.130:9092
+```
+
+### 开放虚拟机端口9092
+
+`firewall-cmd --zone=public --add-port=9092/tcp --permanent`
+
+`firewall-cmd --reload`
+
+### 生产者
+
+```java
+/**
+ * @author xc
+ * @description
+ * @createdTime 2021/5/10 23:58
+ */
+public class KafkaProducerTests {
+    @Test
+    void kafkaProducerTest() {
+        Properties properties = new Properties();
+        properties.put("bootstrap.servers", "192.168.174.130:9092");
+        properties.put("acks", "all");
+        properties.put("retries", 0);
+        properties.put("batch.size", 16384);
+        properties.put("linger.ms", 1);
+        properties.put("buffer.memory", 33554432);
+        properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+
+        KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
+        for (int i = 0; i < 100; i++) {
+            producer.send(new ProducerRecord<String, String>("test", Integer.toString(i), "Kafka message " + i));
+            System.out.println("发送了消息");
+        }
+        producer.close();
+
+    }
+}
+```
+
+### 消费者
+
+```java
+/**
+ * @author xc
+ * @description
+ * @createdTime 2021/5/10 23:59
+ */
+public class KafkaConsumerTests {
+    @Test
+    void kafkaConsumerTest(){
+        Properties props = new Properties();
+        props.setProperty("bootstrap.servers", "192.168.174.130:9092");
+        props.setProperty("group.id", "test");
+        props.setProperty("enable.auto.commit", "true");
+        props.setProperty("auto.commit.interval.ms", "1000");
+        props.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        props.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+        consumer.subscribe(Collections.singletonList("test"));
+        while (true) {
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+            for (ConsumerRecord<String, String> record : records)
+                System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+        }
+    }
+}
+```
+
+### 启动
+
+先启动消费者,后启动生产者,可以看到消费者的终端输出了
+
+```bash
+offset = 502, key = 0, value = Kafka message 0
+offset = 503, key = 1, value = Kafka message 1
+offset = 504, key = 2, value = Kafka message 2
+offset = 505, key = 3, value = Kafka message 3
+offset = 506, key = 4, value = Kafka message 4
+offset = 507, key = 5, value = Kafka message 5
+offset = 508, key = 6, value = Kafka message 6
+offset = 509, key = 7, value = Kafka message 7
+offset = 510, key = 8, value = Kafka message 8
+offset = 511, key = 9, value = Kafka message 9
+offset = 512, key = 10, value = Kafka message 10
+offset = 513, key = 11, value = Kafka message 11
+offset = 514, key = 12, value = Kafka message 12
+offset = 515, key = 13, value = Kafka message 13
+offset = 516, key = 14, value = Kafka message 14
+offset = 517, key = 15, value = Kafka message 15
+offset = 518, key = 16, value = Kafka message 16
+offset = 519, key = 17, value = Kafka message 17
+offset = 520, key = 18, value = Kafka message 18
+offset = 521, key = 19, value = Kafka message 19
+offset = 522, key = 20, value = Kafka message 20
+......
+```
 
