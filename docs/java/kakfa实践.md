@@ -202,6 +202,20 @@ public class KafkaProducerTests {
 }
 ```
 
+- `send()`方法是异步的,添加消息到缓冲区等待发送并立即return,生产者会将单个消息批量在一起进行发送
+
+- `ack`是判断是否发送成功的,`all`将会阻塞消息,这种性能是最低的,但是是最可靠的
+
+- `retries`,如果请求失败,生产者会自动重试,如果启用重试,可能会产生重复消息
+
+- producer缓存每个分区未发送的消息,缓存的大小通过`batch.size`配置指定,数值较大会产生更大的批次并需要更大的内存
+
+  默认缓冲可立即发送,即使缓存空间没有满,但是如果想减少请求的数量,可设置`linger.ms`大于0,这将让生产者在发送请求前等待一会儿,希望更多的消息来填补到缓冲区中
+
+- `buffer.memory`控制生产者可用的缓存总量,如果消息发送速度比其传输到服务器的快,将会耗尽缓存空间,当缓存空间耗尽时,其他发送调用将会被阻塞,阻塞实践的阈值通过`max.block.ms`设定,之后它将抛出一个TimeoutException
+
+- `key.serializer`和`value.serializer`将用户提供的key和value对象ProducerRecord转换成字节,可以使用附带 的**ByteArraySerializer**或**StringSeriializer**处理byte或string类型
+
 ### 消费者
 
 ```java
@@ -230,6 +244,8 @@ public class KafkaConsumerTests {
     }
 }
 ```
+
+
 
 ### 启动
 
@@ -260,3 +276,4 @@ offset = 522, key = 20, value = Kafka message 20
 ......
 ```
 
+### 
