@@ -159,9 +159,8 @@ this is first kafka message
 
 ```bash
 修改config/server.properties
-listeners=PLAINTEXT://你的ip地址:9092
-比如我的:
-listeners=PLAINTEXT://192.168.174.130:9092
+listeners=PLAINTEXT://0.0.0.0:9092
+advertised.listeners=PLAINTEXT://192.168.174.130:9092
 ```
 
 ### 开放虚拟机端口9092
@@ -245,7 +244,9 @@ public class KafkaConsumerTests {
 }
 ```
 
-
+- `enable.auto.commit`自动提交偏移量,`auto.commit.interval.ms`控制提交的频率
+- 客户端订阅了名为`test`的topic,消费者组叫test
+- broker通过心跳检测test消费组中的进程,消费者会自动ping集群,告诉集群他还活着,只要消费者停止心跳的时间超过了`session.timeout.ms`就会被认定为故障,它的分区将会被分配到别的进程
 
 ### 启动
 
@@ -276,4 +277,78 @@ offset = 522, key = 20, value = Kafka message 20
 ......
 ```
 
-### 
+
+
+## springboot集成kafka
+
+### 依赖
+
+```xml
+<dependency>
+  <groupId>org.springframework.kafka</groupId>
+  <artifactId>spring-kafka</artifactId>
+</dependency>
+```
+
+### 生产者
+
+```java
+/**
+ * @author xc
+ * @description
+ * @createdTime 2021/5/10 21:49
+ */
+@RestController
+@RequestMapping("/kafka")
+public class KafkaDemoProducer {
+
+    @Autowired
+    private KafkaTemplate kafkaTemplate;
+
+    @GetMapping("/send/{msg}")
+    public String sendMessage(@PathVariable String msg) {
+        ListenableFuture send = kafkaTemplate.send("springboot-kafka", "测试发送:" + msg + "-" + System.currentTimeMillis());
+        System.out.println(send);
+        return "发送成功";
+    }
+}
+```
+
+### 消费者
+
+```java
+/**
+ * @author xc
+ * @description
+ * @createdTime 2021/5/15 23:55
+ */
+@Component
+public class KafkaDemoConsumer {
+
+
+    @KafkaListener(topics = {"springboot-kafka"})
+    public void onReceive(ConsumerRecord<?, ?> record) {
+        System.out.println("接收消息:" + record.topic() + "-" + record.partition() + "-" + record.value());
+    }
+}
+```
+
+### 测试
+
+- 启动应用
+
+- 发送消息
+
+  ![](https://io.storyxc.com/image-20210516155645928.png)
+
+- 日志
+
+```bash
+2021-05-16 15:56:18.430  INFO 10808 --- [nio-8080-exec-1] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 2.6.0
+2021-05-16 15:56:18.430  INFO 10808 --- [nio-8080-exec-1] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: 62abe01bee039651
+2021-05-16 15:56:18.430  INFO 10808 --- [nio-8080-exec-1] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1621151778430
+2021-05-16 15:56:18.435  INFO 10808 --- [ad | producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=producer-1] Cluster ID: t54vUJ_qTWm-o8WmD-dfag
+org.springframework.util.concurrent.SettableListenableFuture@2a59dc33
+接收消息:springboot-kafka-0-测试发送:hello-1621151778418
+```
+
