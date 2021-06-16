@@ -183,6 +183,7 @@ function getActionSidebar(tools, environment,design) {
         'Centos7安装Python3环境',
         'git配置socks5代理解决github上down代码慢的问题',
         '从零搭建Linux虚拟机环境',
+        'canal部署',
       ]
     },
     {
