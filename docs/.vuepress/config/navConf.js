@@ -6,6 +6,7 @@ module.exports = [
         items: [
             { text: 'Java', link: '/java/' },
             { text: 'Python', link: '/python/' },
+            { text: 'Linux', link: '/linux/'},
             { text: '实践', link: '/actions/'},
             //{ text: '内功', link: '/base/'},
         ]

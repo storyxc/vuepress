@@ -24,6 +24,7 @@ module.exports = {
       '/guide/': getGuideSidebar('指南', '博客历史', '关于我'),
       '/java/': getJavaSidebar('Java基础', 'Java框架', '中间件', '数据库', '开发工具', '其他'),
       '/python/': getPythonSidebar('Python基础', 'Python爬虫', 'PythonWeb', '脚本及其他'),
+      '/linux/': getLinuxSidebar('linux'),
       '/actions/': getActionSidebar('工具', '环境', '设计模式'),
       //'/base/': getBaseSidebar('计算机网络', '数据结构与算法', '操作系统', '计算机组成原理'),
     }
@@ -179,11 +180,8 @@ function getActionSidebar(tools, environment,design) {
       title: environment,
       collapsable: false,
       children: [
-        'Docker Desktop安装',
-        'Centos7安装Python3环境',
+        'Windows下Docker Desktop安装',
         'git配置socks5代理解决github上down代码慢的问题',
-        '从零搭建Linux虚拟机环境',
-        'canal部署',
       ]
     },
     {
@@ -199,6 +197,22 @@ function getActionSidebar(tools, environment,design) {
     //   children: [
     //   ]
     // },
+  ]
+}
+
+function getLinuxSidebar(groupA) {
+  return [
+    {
+      title: groupA,
+      collapsable: false,
+      children: [
+        'Linux服务器文件目录共享映射配置',
+        'bash常用的快捷键',
+        'Centos7安装Python3环境',
+        '从零搭建Linux虚拟机环境',
+        'canal部署',
+      ]
+    }
   ]
 }
 

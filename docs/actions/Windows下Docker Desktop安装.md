@@ -1,10 +1,10 @@
-# Docker Desktop安装
+# Windows下Docker Desktop安装
 
 
 
 
 
-1. 官网下载安装包Docker Desktop Installer.exe,我安装的是windows版本
+1. 官网下载安装包Docker Desktop Installer.exe
 
 2. 运行安装并重启
 
