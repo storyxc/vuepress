@@ -265,5 +265,4 @@ tar xzvf canal.deployer-1.1.5.tar.gz -C /home/install/canal/deployer
   rabbitmq.deliveryMode =
   ```
 
-- 在conf下新建目录instance-A，并将在canal-admin的webui中配置的内容copy到instance-A目录中命名为instance.properties
 - 执行bin目录下的startup.sh
