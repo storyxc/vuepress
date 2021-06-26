@@ -25,7 +25,8 @@
   "homepage": "https://github.com/storyxc/vuepress#readme",
   "dependencies": {
     "moment": "^2.29.1",
-    "vuepress-plugin-auto-sidebar": "^2.2.2"
+    "vuepress-plugin-auto-sidebar": "^2.2.2",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.8.2",
