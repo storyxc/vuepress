@@ -183,6 +183,7 @@ function getActionSidebar(tools, environment,design) {
         'Windows下Docker Desktop安装',
         'git配置socks5代理解决github上down代码慢的问题',
         'mysql启动报错排查及处理',
+        'macOS开启终端的代理',
       ]
     },
     {
@@ -212,6 +213,7 @@ function getLinuxSidebar(groupA) {
         'Centos7安装Python3环境',
         '从零搭建Linux虚拟机环境',
         'canal部署',
+        '链接和别名（ln、alias)',
       ]
     }
   ]
