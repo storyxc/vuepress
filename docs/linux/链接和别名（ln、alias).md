@@ -10,8 +10,8 @@ ln： link，链接，类似windows中的快捷方式的概念，主要针对路
 
 ### 使用
 
-- ln      /mnt/cdrom1  /var/www/html/centos/      ## 硬链接
-- ln -s /mnt/cdrom2   /var/www/html/centos/     ##软链接-符号链接
+- ln      /usr/local/maven/bin/mvn(真实的路径)  /usr/bin/mvn（链接路径）      ## 硬链接
+- ln -s /usr/local/maven/bin/mvn(真实的路径)   /usr/bin/mvn（链接路径）     ##软链接-符号链接
 
 ## 别名
 
