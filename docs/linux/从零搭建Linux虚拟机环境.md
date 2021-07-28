@@ -12,7 +12,7 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
 
 - ifconfig
   - `yum search ifconfig`
-  - `yum install net-tools.x86_6`
+  - `yum install net-tools.x86_64`
 
 - lsb_release
 
