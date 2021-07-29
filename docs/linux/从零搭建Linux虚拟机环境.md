@@ -109,7 +109,7 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
   - 切换到nginx的目录执行
 
     ```bash
-    ./configure
+    ./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module  #配置ssl模块
      
     make
      
@@ -137,7 +137,7 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
 
   - 下载安装包`wget http://download.redis.io/releases/redis-5.0.7.tar.gz`
 
-  - `tar -zxvf redis-6.0.3.tar.gz`
+  - `tar -zxvf redis-5.0.7.tar.gz`
 
   - `mv /root/redis-5.0.7 /usr/local/redis`
 
