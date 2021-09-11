@@ -31,5 +31,6 @@ module.exports = [
         ]
 
     },
+    { text: '壁纸', link: 'http://www.storyxc.com/images'},
     { text: '关于我', link: '/guide/about' },
 ]
