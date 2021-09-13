@@ -184,6 +184,7 @@ function getActionSidebar(tools, environment,design) {
         'git配置socks5代理解决github上down代码慢的问题',
         'mysql启动报错排查及处理',
         'macOS开启终端的代理',
+        'git配置多ssh-key && Gitee 和 Github 同步更新',
       ]
     },
     {
@@ -215,7 +216,6 @@ function getLinuxSidebar(groupA) {
         'canal部署',
         '链接和别名（ln、alias)',
         '阿里云服务器挂载阿里云盘',
-        'git配置多ssh-key && Gitee 和 Github 同步更新',
       ]
     }
   ]
