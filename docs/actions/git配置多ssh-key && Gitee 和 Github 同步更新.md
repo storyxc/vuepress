@@ -67,7 +67,7 @@ gitee或者gitlab账号和个人git账号同时在一台机器上使用时，可
 
    ```bash
    git remote add 远程仓库名 远程仓库地址
-   eg: git remote add gitee git@github.com:xxx/xxx.git
+   eg: git remote add github git@github.com:xxx/xxx.git
    ```
 
    再次查看`git remote`:
