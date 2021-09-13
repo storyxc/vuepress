@@ -215,6 +215,7 @@ function getLinuxSidebar(groupA) {
         'canal部署',
         '链接和别名（ln、alias)',
         '阿里云服务器挂载阿里云盘',
+        'git配置多ssh-key && Gitee 和 Github 同步更新',
       ]
     }
   ]
