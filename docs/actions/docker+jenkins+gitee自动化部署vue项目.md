@@ -35,7 +35,7 @@ Digest: sha256:a942c30fc3bcf269a1c32ba27eb4a470148eff9aba086911320031a3c3943e6c
 Status: Downloaded newer image for jenkins/jenkins:lts
 docker.io/jenkins/jenkins:lts
 # 启动jenkins
-docker run --name jenkins -dp 8099:8080 -v:/story/dist:/story/dist -v ~/jenkins_data:/var/jenkins_home -u root  -e TZ="Asia/Shanghai" -v /etc/localtime:/etc/localtime:ro jenkins/jenkins:lts
+docker run --name jenkins -dp 8099:8080 -v /story/dist:/story/dist -v ~/jenkins_data:/var/jenkins_home -u root  -e TZ="Asia/Shanghai" -v /etc/localtime:/etc/localtime:ro jenkins/jenkins:lts
 # 参数说明 --name 指定容器名为jenkins -d 后台启动 -p 将容器的8080端口映射到宿主机的8099端口
 # -v 挂载宿主机目录 宿主机和容器的目录会同步 -u 指定用户为root 这里是必须的 不然后续操作文件系统会报无权限
 # 挂载时区的目录是因为镜像中的linux系统默认时区非北京时间，会导致时间显示不正确
