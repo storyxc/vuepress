@@ -185,6 +185,7 @@ function getActionSidebar(tools, environment,design) {
         'mysql启动报错排查及处理',
         'macOS开启终端的代理',
         'git配置多ssh-key && Gitee 和 Github 同步更新',
+        'docker+jenkins+gitee自动化部署vue项目.md',
       ]
     },
     {
