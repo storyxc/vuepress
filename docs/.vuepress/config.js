@@ -115,7 +115,7 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
         'OpenJDK没有jstack等命令的解决办法',
         'ribbon刷新服务列表间隔和canal的坑',
         '微信小程序加密数据对称解密工具类',
-        'classpath:和classpath*区别',
+        'classpath和classpath*区别',
       ]
     }
   ]
