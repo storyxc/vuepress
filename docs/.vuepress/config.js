@@ -77,7 +77,7 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
         'SpringMVC的执行流程源码分析',
         'netty+websocket实现即时通讯功能',
         '分布式定时任务解决方案xxl-job',
-
+        'spring-session实现集群session共享',
       ]
     },
     {
