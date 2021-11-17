@@ -219,6 +219,7 @@ function getLinuxSidebar(groupA) {
         'canal部署',
         '链接和别名（ln、alias)',
         '阿里云服务器挂载阿里云盘',
+        'centos7防火墙命令',
       ]
     }
   ]
