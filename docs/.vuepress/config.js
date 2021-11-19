@@ -176,6 +176,7 @@ function getActionSidebar(tools, environment,design) {
         'git命令整理',
         'Markdown基础语法',
         'Typora、PicGo、七牛云实现markdown图片自动上传图床',
+        'iterm2配合oh-my-zsh配置个性主题终端',
       ]
     },
     {
@@ -188,7 +189,6 @@ function getActionSidebar(tools, environment,design) {
         'macOS开启终端的代理',
         'git配置多ssh-key && Gitee 和 Github 同步更新',
         'docker+jenkins+gitee自动化部署vue项目.md',
-        'iterm2配合oh-my-zsh配置个性主题终端',
       ]
     },
     {
