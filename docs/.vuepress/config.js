@@ -177,6 +177,7 @@ function getActionSidebar(tools, environment,design) {
         'Markdown基础语法',
         'Typora、PicGo、七牛云实现markdown图片自动上传图床',
         'iterm2配合oh-my-zsh配置个性主题终端',
+        'iterm2配置ssh快速连接',
       ]
     },
     {
