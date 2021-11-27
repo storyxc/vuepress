@@ -32,8 +32,10 @@ gitee或者gitlab账号和个人git账号同时在一台机器上使用时，可
    PreferredAuthentications publickey
    IdentityFile ~/.ssh/github_id_rsa
    ```
+   
+4. 分别在gitee和github中添加前两步生成的对应地址的公钥
 
-4. ssh命令测试
+5. ssh命令测试
 
    ```bash
    ssh -T git@gitee.com
