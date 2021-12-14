@@ -45,7 +45,7 @@
 ## 安装历史指令提示插件
 
 ### clone代码到本地
-`git clone https://github.com/zsh-users/zsh-autosuggestionns ~/.zsh/zsh-autosuggestions`
+`git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions`
 
 
 ### 修改.zshrc配置
