@@ -41,3 +41,12 @@
 ### 效果
 
 ![image-20211119151720033](https://io.storyxc.com/image-20211119151720033.png)
+
+## 安装历史指令提示插件
+
+### clone代码到本地
+`git clone https://github.com/zsh-users/zsh-autosuggestionns ~/.zsh/zsh-autosuggestions`
+
+
+### 修改.zshrc配置
+`source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh`
