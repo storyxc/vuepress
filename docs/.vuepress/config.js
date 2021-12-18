@@ -222,6 +222,7 @@ function getLinuxSidebar(groupA) {
         '链接和别名（ln、alias)',
         '阿里云服务器挂载阿里云盘',
         'centos7防火墙命令',
+        '阿里云服务器启用密钥登录并禁用密码登录',
       ]
     }
   ]
