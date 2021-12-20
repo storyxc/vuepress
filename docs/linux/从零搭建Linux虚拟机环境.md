@@ -366,18 +366,19 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
       bind 0.0.0.0 #所有ipv4端口
       protected-mode no # 关闭保护模式
       daemonize yes # 守护进程
+      pidfile /var/run/redis_6379.pid
       ```
-  
+      
     - ```bash
       # 授权
       chmod 777 /etc/init.d/redis
       ```
-  
+    
     - ```bash
       # 开机启动
       chkconfig redis on
       ```
-  
+    
     - ```bash
       # 创建客户端软链接
       ln -s /usr/local/redis/bin/redis-cli /usr/local/bin/redis-cli 
