@@ -56,6 +56,7 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
     ```
 
   - 重启虚拟机使环境变量生效或者`source /etc/profile`
+  
 - python3
   - 见另一篇博客 [centos7安装python环境](https://blog.storyxc.com/actions/Centos7%E5%AE%89%E8%A3%85Python3%E7%8E%AF%E5%A2%83.html)
 
@@ -98,6 +99,7 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
   - gcc `yum -y install gcc`
 
   - `yum install pcre pcre-devel`
+
   - `yum install zlib zlib-devel`
 
   - `yum install openssl openssl-devel`
@@ -119,6 +121,153 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
   - 安装后切换到/usr/local/nginx/sbin启动nginx并访问
 
     ![image-20210505174840552](https://io.storyxc.com/image-20210505174840552.png)
+    
+  - 开机自启nginx
+
+    - `vi /etc/init.d/nginx`
+
+      ```bash
+      #!/bin/bash
+      #
+      # nginx - this script starts and stops the nginx daemon
+      #
+      # chkconfig:   - 85 15
+      # description:  NGINX is an HTTP(S) server, HTTP(S) reverse \
+      #               proxy and IMAP/POP3 proxy server
+      # processname: nginx
+      # config:      /etc/nginx/nginx.conf
+      # config:      /etc/sysconfig/nginx
+      # pidfile:     /var/run/nginx.pid
+      
+      # Source function library.
+      . /etc/rc.d/init.d/functions
+      
+      # Source networking configuration.
+      . /etc/sysconfig/network
+      
+      # Check that networking is up.
+      [ "$NETWORKING" = "no" ] && exit 0
+      
+      nginx="/usr/local/nginx/sbin/nginx"
+      prog=$(basename $nginx)
+      
+      NGINX_CONF_FILE="/usr/local/nginx/conf/nginx.conf"
+      
+      [ -f /etc/sysconfig/nginx ] && . /etc/sysconfig/nginx
+      
+      lockfile=/var/lock/subsys/nginx
+      
+      make_dirs() {
+        # make required directories
+        user=`$nginx -V 2>&1 | grep "configure arguments:.*--user=" | sed 's/[^*]*--user=\([^ ]*\).*/\1/g' -`
+        if [ -n "$user" ]; then
+          if [ -z "`grep $user /etc/passwd`" ]; then
+            useradd -M -s /bin/nologin $user
+          fi
+          options=`$nginx -V 2>&1 | grep 'configure arguments:'`
+          for opt in $options; do
+              if [ `echo $opt | grep '.*-temp-path'` ]; then
+                value=`echo $opt | cut -d "=" -f 2`
+                if [ ! -d "$value" ]; then
+                  # echo "creating" $value
+                  mkdir -p $value && chown -R $user $value
+                fi
+              fi
+          done
+        fi
+      }
+      
+      start() {
+        [ -x $nginx ] || exit 5
+        [ -f $NGINX_CONF_FILE ] || exit 6
+        make_dirs
+        echo -n $"Starting $prog: "
+        daemon $nginx -c $NGINX_CONF_FILE
+        retval=$?
+        echo
+        [ $retval -eq 0 ] && touch $lockfile
+        return $retval
+      }
+      
+      stop() {
+        echo -n $"Stopping $prog: "
+        killproc $prog -QUIT
+        retval=$?
+        echo
+        [ $retval -eq 0 ] && rm -f $lockfile
+        return $retval
+      }
+      
+      restart() {
+        configtest || return $?
+        stop
+        sleep 1
+        start
+      }
+      
+      reload() {
+        configtest || return $?
+        echo -n $"Reloading $prog: "
+        killproc $nginx -HUP
+        RETVAL=$?
+        echo
+      }
+      
+      force_reload() {
+        restart
+      }
+      
+      configtest() {
+        $nginx -t -c $NGINX_CONF_FILE
+      }
+      
+      rh_status() {
+        status $prog
+      }
+      
+      rh_status_q() {
+        rh_status >/dev/null 2>&1
+      }
+      
+      case "$1" in
+        start)
+          rh_status_q && exit 0
+          $1
+          ;;
+        stop)
+          rh_status_q || exit 0
+          $1
+          ;;
+        restart|configtest)
+          $1
+          ;;
+        reload)
+          rh_status_q || exit 7
+          $1
+          ;;
+        force-reload)
+          force_reload
+          ;;
+        status)
+          rh_status
+          ;;
+        condrestart|try-restart)
+          rh_status_q || exit 0
+          ;;
+        *)
+          echo $"Usage: $0 {start|stop|status|restart|reload|configtest}"
+          exit 2
+      esac
+      
+      ```
+
+    - ```bash
+      chmod 777 /etc/init.d/nginx
+      ```
+
+    - ```bash
+      chkconfig nginx on
+      ```
 
 - 开放端口
   - 查看已经开放的端口`firewall-cmd --list-ports`
@@ -234,8 +383,37 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
       ln -s /usr/local/redis/bin/redis-cli /usr/local/bin/redis-cli 
       ```
   
-- kafka
+- docker
 
-  - `wget https://mirror-hk.koddos.net/apache/kafka/2.8.0/kafka_2.13-2.8.0.tgz`
+  - 卸载旧版本
   
+    ```bash
+    sudo yum remove docker \
+                      docker-client \
+                      docker-client-latest \
+                      docker-common \
+                      docker-latest \
+                      docker-latest-logrotate \
+                      docker-logrotate \
+                      docker-engine
+    ```
   
+  - 使用docker repository安装
+  
+    ```bash
+    # set up repository
+    sudo yum install -y yum-utils
+     
+    sudo yum-config-manager \
+        --add-repo \
+        https://download.docker.com/linux/centos/docker-ce.repo
+        
+        
+    # install docker engine
+    sudo yum install docker-ce docker-ce-cli containerd.io
+    
+    # start docker engine
+    sudo systemctl start docker
+    ```
+  
+    
