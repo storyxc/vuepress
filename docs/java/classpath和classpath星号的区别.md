@@ -1,4 +1,4 @@
-# classpath和classpath*区别
+# classpath和classpath*的区别
 
 
 今天同事碰到个问题，在服务中引入了另一个服务的mapper文件后找不到其中配置的resultMap引发报错。后经排查是因为配置文件中classpath的配置问题引起的。
