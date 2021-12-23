@@ -42,12 +42,12 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
 - JDK1.8
   - oracle官网下载jdk后上传虚拟机
 
-  - 解压并配置环境变量
+  - 解压并配置环境变量，比如我下载的是jre1.8.0_202
 
     `vi /etc/profile/`
 
     ```bash
-    JAVA_HOME=/usr/local/java/jdk1.8.0_291
+    JAVA_HOME=/usr/local/java/jre1.8.0_202
     PATH=$JAVA_HOME/bin:$PATH
     CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/jre/lib/rt.jar
     export JAVA_HOME
@@ -55,13 +55,14 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
     export PATH
     ```
 
-  - 重启虚拟机使环境变量生效或者`source /etc/profile`
+  - `source /etc/profile`或重启虚拟机使环境变量生效
+  
 - python3
   - 见另一篇博客 [centos7安装python环境](https://blog.storyxc.com/actions/Centos7%E5%AE%89%E8%A3%85Python3%E7%8E%AF%E5%A2%83.html)
 
 - mysql 5.7
 
-  - 下载并安装mysql官方的yum repository: `wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm`
+  - 下载并安装mysql官方的yum repository: `wget -i http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm`
 
   - `yum -y install mysql57-community-release-el7-10.noarch.rpm`
 
@@ -73,21 +74,21 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
 
   - 根据临时密码登入mysql
 
-  - 改密码 `ALTER USER 'root'@'localhost' IDENTIFIED BY 'new pwd'`
+  - 改密码 `ALTER USER 'root'@'localhost' IDENTIFIED BY 'new pwd';`
 
   - 更改密码弱口令设置，设置简单密码：
 
-    -  `set global validate_password_policy=0`;
+    -  `set global validate_password_policy=0;`
 
-    - ` set global validate_password_length=1`
+    - ` set global validate_password_length=1;`
 
   - 卸载安装的mysql的yum repository `yum -y remove mysql57-community-release-el7-10.noarch`
 
   - 配置远程登陆
 
-    - `grant all on *.* to 'root'@'%' identified by 'pwd'`
+    - `grant all on *.* to 'root'@'%' identified by 'pwd';`
 
-    - 立即生效: `flush privileges`
+    - 立即生效: `flush privileges;`
 
   
 
@@ -95,19 +96,14 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
 
 - nginx
 
-  - gcc `yum -y install gcc`
-
-  - `yum install pcre pcre-devel`
-  - `yum install zlib zlib-devel`
-
-  - `yum install openssl openssl-devel`
+  - gcc `yum -y install gcc pcre pcre-devel zlib zlib-devel openssl openssl-devel`  
 
   - 下载安装包 `wget http://nginx.org/download/nginx-1.9.9.tar.gz  `
-
+  
   - 解压到指定目录 `tar -xzvf  nginx-1.9.9.tar.gz  -C /usr/local/nginx/`
-
-  - 切换到nginx的目录执行
-
+  
+  - 切换到nginx的目录执行 cd /usr/local/nginx/nginx-1.9.9
+  
     ```bash
     ./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module  #配置ssl模块
      
@@ -115,11 +111,11 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
      
     make install
     ```
-
+  
   - 安装后切换到/usr/local/nginx/sbin启动nginx并访问
-
+  
     ![image-20210505174840552](https://io.storyxc.com/image-20210505174840552.png)
-
+  
 - 开放端口
   - 查看已经开放的端口`firewall-cmd --list-ports`
   - 开启端口 `firewall-cmd --zone=public --add-port=80/tcp --permanent`
@@ -141,7 +137,7 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
 
   - `mv /root/redis-5.0.7 /usr/local/redis`
 
-  - `cd  /usr/local/redis`
+  - `cd  /usr/local/redis/redis-5.0.7`
 
   - `make && make PREFIX=/usr/local/redis install`
 
@@ -150,12 +146,11 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
     - 执行命令
   
       ```bash
-      yum -y install centos-release-scl
-      yum -y install devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils 
+      yum -y install centos-release-scl devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils 
       # scl enable devtoolset-9 bash #临时启用新版本的gcc
       echo "source /opt/rh/devtoolset-9/enable" >>/etc/profile # 永久启用新版gcc
       ```
-  
+    
   - 开机自启redis
   
     - ```bash
@@ -217,18 +212,20 @@ http://vault.centos.org/7.7.1908/isos/x86_64/CentOS-7-x86_64-DVD-1908.torrent
       bind 0.0.0.0 #所有ipv4端口
       protected-mode no # 关闭保护模式
       daemonize yes # 守护进程
+      requirepass password #需要密码登录
+      pidfile /var/run/redis_6379.pid #pid文件
       ```
-  
+      
     - ```bash
       # 授权
       chmod 777 /etc/init.d/redis
       ```
-  
+    
     - ```bash
       # 开机启动
       chkconfig redis on
       ```
-  
+    
     - ```bash
       # 创建客户端软链接
       ln -s /usr/local/redis/bin/redis-cli /usr/local/bin/redis-cli 
