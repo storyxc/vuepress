@@ -79,6 +79,7 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
         '分布式定时任务解决方案xxl-job',
         'spring-session实现集群session共享',
         'springcloud优雅下线服务',
+        'Java日志发展历史',
       ]
     },
     {
