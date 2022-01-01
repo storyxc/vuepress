@@ -20,5 +20,5 @@ Hello，这里是我的个人博客，如果博客内容能够帮助到你，我
 如有问题，可以通过storyxc@163.com和我取得联系
 :::
 
-<p style="text-align:center;">MIT Licensed | Copyright © 2019-2021 故事 <a href="http://www.beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">豫ICP备19046036号</a></p>
+<p style="text-align:center;">MIT Licensed | Copyright © 2019-2021 故事 <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">豫ICP备19046036号</a></p>
 
