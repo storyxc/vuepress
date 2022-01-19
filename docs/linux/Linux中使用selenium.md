@@ -29,7 +29,7 @@
 ```bash
 wget http://npm.taobao.org/mirrors/chromedriver/96.0.4664.45/chromedriver_linux64.zip
 
-tar -xvf chromedriver_linux64.zip
+unzip chromedriver_linux64.zip
 
 mv chromedriver /usr/bin
 
