@@ -3,7 +3,7 @@ const pluginsConf = require("./config/pluginsConf")
 const navConf = require("./config/navConf")
 
 module.exports = {
-  title: '故事而已的个人站',
+  title: '故事',
   description: '故事的vuepress博客',
   head: headConf,
   plugins: pluginsConf,
