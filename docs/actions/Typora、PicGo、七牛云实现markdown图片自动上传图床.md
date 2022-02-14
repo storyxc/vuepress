@@ -14,17 +14,19 @@
 
 这里我还是选择了上传到图床，上传支持PicGo和自定义脚本，本来打算写个python脚本的，后来发现picgo这个应用也很好用，那就直接拿过来用吧。
 
+## 配置picgo
 
+### 通过gui配置
 
-## 1.下载picgo
+#### 1.下载picgo
 
 点击[PicGo](https://github.com/Molunerfinn/PicGo) 进入仓库下载，这里选择windows版的执行程序，下载之后打开
 
-## 2.申请七牛云账号配置存储空间
+#### 2.申请七牛云账号配置存储空间
 
 没有图床的可以搜一下相关教程，这里不再赘述
 
-## 3.配置图床信息
+#### 3.配置图床信息
 
 ![image-20210410202814211](https://io.storyxc.com/image-20210410202814211.png)
 
@@ -40,10 +42,26 @@
 
 ![image-20210410203157833](https://io.storyxc.com/image-20210410203157833.png)
 
-## 4.回到typora测试一下吧
+#### 4.回到typora测试一下吧
 
 ![image-20210410203327770](https://io.storyxc.com/image-20210410203327770.png)
 
 ![image-20210410203412022](https://io.storyxc.com/image-20210410203412022.png)
 
 先验证一下，可以看到成功了。这样再在typora中添加图片就可以看到图片会自动上传到你的图床并修改markdown中的地址了。
+
+### 通过picgo-core配置
+
+npm安装picgo-core：`npm install -g picgo`
+
+配置uploader：`picgo set uploader`
+
+使用uploader：`picgo use uploader`
+
+> 配置文件地址为~/.picgo/config.json，可以手动修改
+
+配置完成后在typora中配置自定义命令上传，命令格式 `node_path picgo_path upload`例如我的是`/opt/homebrew/bin/node /opt/homebrew/bin/picgo upload`
+
+![image-20220214180934655](https://io.storyxc.com/blog/image-20220214180934655.png)
+
+验证上传选项，看到返回图片地址即可

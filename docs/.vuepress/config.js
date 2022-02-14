@@ -148,6 +148,7 @@ function getPythonSidebar(base, spider, web, others) {
         'CrawlSpider全站爬取',
         '分布式爬虫和增量式爬虫',
         '增量式爬虫实践案例 下载指定b站up主的所有作品',
+        '小红书图片爬虫'
       ]
     },
     {
