@@ -4,6 +4,7 @@
 
 ## 安装linux版chrome
 
+### centos
 `wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm`
 
 `yum install google-chrome-stable_current_x86_64.rpm`
@@ -11,6 +12,26 @@
 ## 安装相关库
 
 `yum install mesa-libOSMesa-devel gnu-free-sans-fonts wqy-zenhei-fonts`
+
+
+### ubuntu
+`wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb`
+`sudo dpkg -i google-chrome-stable_current_amd64.deb `
+
+
+
+> 安装报错 
+>
+> dpkg: error processing package google-chrome-stable (--install):
+>  dependency problems - leaving unconfigured
+> Processing triggers for mime-support (3.64ubuntu1) ...
+> Processing triggers for man-db (2.9.1-1) ...
+> Errors were encountered while processing:
+>  google-chrome-stable
+
+使用`sudo apt-get install -f`修复依赖关系，
+
+*如果系统中有某个软件包不满足依赖条件,这个命令就会自动修复,将要安装那个软件包依赖的软件包。*
 
 ## 安装chromedriver
 
