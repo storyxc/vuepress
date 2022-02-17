@@ -164,6 +164,7 @@ function getPythonSidebar(base, spider, web, others) {
       collapsable: false,
       children: [
         'argparse模块入门',
+        '切换windows代理设置开关',
       ]
     }
   ]
