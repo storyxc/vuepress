@@ -2,7 +2,7 @@
 
 
 
-```
+```python
 import sys
 import subprocess
 import re
@@ -30,10 +30,12 @@ if __name__ == '__main__':
 
 
 
-![image-20220221194201279](https://io.storyxc.com/blog/image-20220221194201279.png)
-
-
-
 release：https://github.com/storyxc/Alfred-open-with-editor/releases/download/Alfred/Open.with.Editor.alfredworkflow
 
 repository：https://github.com/storyxc/Alfred-open-with-editor/releases/tag/Alfred
+
+
+
+
+
+![image-20220221194201279](https://io.storyxc.com/blog/image-20220221194201279.png)
