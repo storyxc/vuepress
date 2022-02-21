@@ -165,6 +165,7 @@ function getPythonSidebar(base, spider, web, others) {
       children: [
         'argparse模块入门',
         '切换windows代理设置开关',
+        'Alfred插件-快速使用编辑器打开指定文件',
       ]
     }
   ]
