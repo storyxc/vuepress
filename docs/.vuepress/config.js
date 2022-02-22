@@ -14,7 +14,7 @@ module.exports = {
     //logo: '/assets/img/story.jpg',
     lastUpdated: 'Last Updated',
     nav: navConf,
-    repo: 'storyxc/vuepress',
+    repo: 'storyxc',
     docsDir: 'docs',
     editLinks: true,
     docsBranch: 'main',
