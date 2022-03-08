@@ -26,9 +26,10 @@ module.exports = {
       '/java/': getJavaSidebar('Java基础', 'Java框架', '中间件', '数据库', '开发工具', '其他'),
       '/python/': getPythonSidebar('Python基础', 'Python爬虫', 'PythonWeb', '脚本及其他'),
       '/linux/': getLinuxSidebar('linux'),
+      '/docker/': getDockerSidebar('docker','docker-compose'),
       '/actions/': getActionSidebar('工具', '环境', '设计模式'),
       //'/base/': getBaseSidebar('计算机网络', '数据结构与算法', '操作系统', '计算机组成原理'),
-      '/docker/': getDockerSidebar('docker','docker-compose'),
+      
     }
   }
 }
