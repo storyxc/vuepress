@@ -3,6 +3,7 @@ const pluginsConf = require("./config/pluginsConf")
 const navConf = require("./config/navConf")
 
 module.exports = {
+  //base: '/storyxc/', 静态资源统一前缀
   title: '故事',
   description: '故事的vuepress博客',
   head: headConf,
@@ -27,6 +28,7 @@ module.exports = {
       '/linux/': getLinuxSidebar('linux'),
       '/actions/': getActionSidebar('工具', '环境', '设计模式'),
       //'/base/': getBaseSidebar('计算机网络', '数据结构与算法', '操作系统', '计算机组成原理'),
+      '/docker/': getDockerSidebar('docker','docker-compose'),
     }
   }
 }
@@ -229,6 +231,25 @@ function getLinuxSidebar(groupA) {
         '阿里云服务器启用密钥登录并禁用密码登录',
         '腾讯云服务器存在对外攻击行为的处理',
         'Linux中使用selenium',
+      ]
+    }
+  ]
+}
+
+function getDockerSidebar(docker,docker_compose) {
+  return [
+    {
+      title: docker,
+      collapsable: false,
+      children: [
+        'aaa'
+      ]
+    },
+    {
+      title: docker_compose,
+      collapsable: false,
+      children: [
+        'bbb',
       ]
     }
   ]
