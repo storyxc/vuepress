@@ -242,14 +242,14 @@ function getDockerSidebar(docker,docker_compose) {
       title: docker,
       collapsable: false,
       children: [
-        'aaa'
+        'Dockerfile语法',
       ]
     },
     {
       title: docker_compose,
       collapsable: false,
       children: [
-        'bbb',
+        'docker-compose.yaml语法',
       ]
     }
   ]
