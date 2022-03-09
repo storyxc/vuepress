@@ -233,6 +233,7 @@ function getLinuxSidebar(groupA) {
         '腾讯云服务器存在对外攻击行为的处理',
         'Linux中使用selenium',
         'nginx配置',
+        'centos7设置swap空间',
       ]
     }
   ]
