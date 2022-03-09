@@ -53,7 +53,7 @@ The last packet sent successfully to the server was 0 milliseconds ago. The driv
 
 在[mysqld]下面加一行：`log_error=/var/log/mysql/error.log` ，然后创建/var/log/mysql这个目录
 
-再次启动，依旧报错，但这次我们可以去看错误日志了。继续 less /var/log/mysql/error.log
+再次启动，依旧报错，但这次我们可以去看错误日志了。继续 `less /var/log/mysql/error.log`
 
 
 
@@ -114,7 +114,7 @@ swap分区已存在，执行命令使系统重启swap分区自动加载：vim /e
 
 
 
-再次启动 还是他喵不行，开始思考是不是内存不够了，然后执行命令查看下当前内存占用大户。
+再次启动 还是他喵不行，执行命令查看下当前内存占用大户。
 
 `ps -eo pid,ppid,%mem,%cpu,cmd --sort=-%mem | head`
 
