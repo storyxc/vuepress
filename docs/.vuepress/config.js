@@ -232,6 +232,7 @@ function getLinuxSidebar(groupA) {
         '阿里云服务器启用密钥登录并禁用密码登录',
         '腾讯云服务器存在对外攻击行为的处理',
         'Linux中使用selenium',
+        'nginx配置',
       ]
     }
   ]
