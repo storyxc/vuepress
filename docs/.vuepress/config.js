@@ -27,6 +27,7 @@ module.exports = {
       '/python/': getPythonSidebar('Python基础', 'Python爬虫', 'PythonWeb', '脚本及其他'),
       '/linux/': getLinuxSidebar('linux'),
       '/docker/': getDockerSidebar('docker','docker-compose'),
+      '/swift/': getSwiftSidebar('Swift','SwiftUI'),
       '/actions/': getActionSidebar('工具', '环境', '设计模式'),
       //'/base/': getBaseSidebar('计算机网络', '数据结构与算法', '操作系统', '计算机组成原理'),
       
@@ -253,6 +254,25 @@ function getDockerSidebar(docker,docker_compose) {
       collapsable: false,
       children: [
         'docker-compose.yaml语法',
+      ]
+    }
+  ]
+}
+
+function getSwiftSidebar(Swift,SwiftUI) {
+  return [
+    {
+      title: Swift,
+      collapsable: false,
+      children: [
+        'swift语法入门',
+      ]
+    },
+    {
+      title: SwiftUI,
+      collapsable: false,
+      children: [
+        'todo',
       ]
     }
   ]
