@@ -7,6 +7,7 @@ module.exports = [
             { text: 'Java', link: '/java/' },
             { text: 'Python', link: '/python/' },
             { text: 'Linux', link: '/linux/'},
+            { text: 'Swift', link: '/swift/'},
             { text: 'Docker', link: '/docker/'},
             { text: '实践', link: '/actions/'},
             //{ text: '内功', link: '/base/'},
