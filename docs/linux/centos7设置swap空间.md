@@ -30,7 +30,7 @@ Filesystem中`/dev/vda1`挂载点为`/`的就是我们的磁盘
 
 修改权限使文件只能root访问：`chmod 600 /swapfile`
 
-将文件标记为swap空间：`mishap /swapfile`
+将文件标记为swap空间：`mkswap /swapfile`
 
 启用swap文件：`swapon /swapfile`
 
