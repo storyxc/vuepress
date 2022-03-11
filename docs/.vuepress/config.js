@@ -272,7 +272,7 @@ function getSwiftSidebar(Swift,SwiftUI) {
       title: SwiftUI,
       collapsable: false,
       children: [
-        'todo',
+        'SwiftUI入门',
       ]
     }
   ]
