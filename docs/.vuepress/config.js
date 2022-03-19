@@ -247,6 +247,7 @@ function getDockerSidebar(docker,docker_compose) {
       collapsable: false,
       children: [
         'Dockerfile语法',
+        '常用指令',
       ]
     },
     {
