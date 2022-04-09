@@ -84,6 +84,7 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
         'spring-session实现集群session共享',
         'springcloud优雅下线服务',
         'Java日志发展历史',
+        'Mybatis Generator配置',
       ]
     },
     {
