@@ -70,6 +70,7 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
       children: [
         'String类的深入学习',
         'JDK1.8 HashMap源码学习',
+        'Java8新特性回顾',
 
       ]
     },
