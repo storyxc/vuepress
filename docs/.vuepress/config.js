@@ -85,6 +85,8 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
         'spring-session实现集群session共享',
         'springcloud优雅下线服务',
         'Java日志发展历史',
+        'Mybatis Generator配置',
+        'JavaSPI机制和Springboot自动装配原理',
       ]
     },
     {
@@ -110,6 +112,7 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
       collapsable: false,
       children: [
         'Maven的生命周期',
+        'nexus无法下载依赖的问题记录',
       ]
     },
     {
@@ -248,6 +251,7 @@ function getDockerSidebar(docker,docker_compose) {
       collapsable: false,
       children: [
         'Dockerfile语法',
+        '常用指令',
       ]
     },
     {
