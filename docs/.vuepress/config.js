@@ -87,6 +87,7 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
         'Java日志发展历史',
         'Mybatis Generator配置',
         'JavaSPI机制和Springboot自动装配原理',
+        'Spring Cloud Config接入',
       ]
     },
     {
