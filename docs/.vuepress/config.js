@@ -88,6 +88,7 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
         'Mybatis Generator配置',
         'JavaSPI机制和Springboot自动装配原理',
         'Spring Cloud Config接入',
+        '使用spring validation进行参数校验',
       ]
     },
     {
@@ -127,6 +128,7 @@ function getJavaSidebar(base, frame, midware, db, tools, others) {
         'ribbon刷新服务列表间隔和canal的坑',
         '微信小程序加密数据对称解密工具类',
         'classpath和classpath*的区别',
+        'feign请求导致的用户ip获取问题记录',
       ]
     }
   ]
