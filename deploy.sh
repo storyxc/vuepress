@@ -29,3 +29,5 @@ git commit -m "${msg}"
 git push -f $githubUrl master:gh-pages
 
 cd -
+
+rm -rf docs/.vuepress/dist
