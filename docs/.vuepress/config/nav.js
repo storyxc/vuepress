@@ -8,7 +8,7 @@ module.exports = [
             { text: 'Python', link: '/pages/ecb94e/' },
             { text: 'Linux', link: '/pages/eeefb8/' },
             { text: 'Swift', link: '/pages/416f59/' },
-            { text: 'Docker', link: '/pages/d6c4f3/' },
+            { text: 'Docker', link: '/pages/5111ec/' },
             { text: '实践', link: '/pages/20fb9d/' },
             //{ text: '内功', link: '/base/'},
 
