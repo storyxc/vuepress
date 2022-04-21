@@ -10,6 +10,7 @@ module.exports = [
             { text: 'Swift', link: '/pages/416f59/' },
             { text: 'Docker', link: '/pages/5111ec/' },
             { text: '实践', link: '/pages/20fb9d/' },
+            { text: '折腾', link: '/pages/de595b/' }
             //{ text: '内功', link: '/base/'},
 
         ]
