@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /assets/img/story.jpg
+heroImage: /assets/img/logo.png
 heroText: 故事
 tagline: 🚀热爱，是所有的理由和答案
 actionText: 进入博客 →
