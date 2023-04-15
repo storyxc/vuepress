@@ -14,9 +14,9 @@ jobs:
     steps:
     # 获取仓库源码
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }} # 步骤2
-      uses: actions/setup-node@v1 # 作用：安装nodejs
+      uses: actions/setup-node@v3 # 作用：安装nodejs
       with:
         node-version: ${{ matrix.node-version }} # 版本
     # 构建和部署
