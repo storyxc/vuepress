@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest # 运行在ubuntu-latest环境的虚拟机中
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [16.x]
     steps:
     # 获取仓库源码
     - name: Checkout
