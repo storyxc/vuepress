@@ -38,11 +38,6 @@ module.exports = {
         link: "https://github.com/storyxc"
       },
       {
-        iconClass: "icon-gitee",
-        title: "Gitee",
-        link: "https://gitee.com/storyxc"
-      },
-      {
         iconClass: "icon-youjian",
         title: "发邮件",
         link: "mailto:storyxc@163.com"
