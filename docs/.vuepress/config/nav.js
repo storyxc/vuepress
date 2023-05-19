@@ -30,5 +30,5 @@ module.exports = [
         ]
 
     },
-    { text: '壁纸', link: 'https://www.storyxc.com/images' },
+    // { text: '壁纸', link: 'https://www.storyxc.com/images' },
 ]
