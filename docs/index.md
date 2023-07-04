@@ -8,11 +8,11 @@ actionLink: /pages/8c2319/
 bannerBg: none
 
 features:
-- title: 开发
+- title: Coding
   details: 编程让我解构世界。
-- title: 足球
+- title: Football
   details: 白云偶尔会遮住蓝天，但蓝天永远在白云之上。
-- title: 吉他
+- title: Guitar
   details: 还记得，年少时的梦吗？
 
 postList: none

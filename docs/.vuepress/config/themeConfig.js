@@ -48,7 +48,7 @@ module.exports = {
   footer: {
     createYear: 2019,
     copyrightInfo: [
-      '<a href="http://storyxc.com" target="_blank" style="font-weight:bold">story</a>',
+      '<a href="https://storyxc.com" target="_blank" style="font-weight:bold">story</a>',
       ' | ',
       '<a href="http://beian.miit.gov.cn/" target=_blank>豫ICP备19046036号</a>',
     ].join('')
