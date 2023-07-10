@@ -1,2 +1,1 @@
-# vuepress
-storyxc blog
+deprecated
